@@ -8,7 +8,6 @@
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/thin_border"
         android:gravity="center" />
 
 </RelativeLayout>
