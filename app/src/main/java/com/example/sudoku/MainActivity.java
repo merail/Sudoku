@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,18 +43,9 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        RecyclerView recycler = findViewById(R.id.recyclerView);
-        recycler.setHasFixedSize(true);
-        RecyclerView.LayoutManager manager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
-        recycler.setLayoutManager(manager);
-
-        int K = 10;
-        Sudoku sudoku = new Sudoku(K);
-        sudoku.fillValues();
-        sudoku.printSudoku();
-        ArrayList<Integer> list = sudoku.getSudoku();
-        Adapter adapter = new Adapter(list, this);
-        recycler.setAdapter(adapter);
+        MatrixFragment matrixFragment = MatrixFragment.newInstance();
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().add(R.id.main, matrixFragment).commit();
     }
 
     @Override
