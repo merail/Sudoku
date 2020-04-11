@@ -1,10 +1,12 @@
 package com.example.sudoku;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -25,47 +27,64 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.element, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.cell, parent, false);
         return new ViewHolder(view);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         if(position % 27 == 0 || (position - 3) % 27 == 0 || (position - 6) % 27 == 0)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_left_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_left_cell));
         else if(((position - 1) % 27 == 0 || (position - 4) % 27 == 0 || (position - 7) % 27 == 0) && position < 72)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_center_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_center_cell));
         else if(((position - 2) % 27 == 0 || (position - 5) % 27 == 0) && position < 72)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_right_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_right_cell));
         else if((position - 8) % 27 == 0)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_right_end_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_right_end_cell));
         else if((position - 9) % 27 == 0 || (position - 12) % 27 == 0 || (position - 15) % 27 == 0)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_left_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_left_cell));
         else if(((position - 10) % 27 == 0 || (position - 13) % 27 == 0 || (position - 16) % 27 == 0))
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_center_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_center_cell));
         else if((position - 11) % 27 == 0 || (position - 14) % 27 == 0)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_right_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_right_cell));
         else if((position - 17) % 27 == 0)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_right_end_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_right_end_cell));
         else if(((position - 18) % 27 == 0 || (position - 21) % 27 == 0 || (position - 24) % 27 == 0) && position < 72)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_left_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_left_cell));
         else if(((position - 19) % 27 == 0 || (position - 22) % 27 == 0 || (position - 25) % 27 == 0) && position < 72)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_center_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_center_cell));
         else if(((position - 20) % 27 == 0 || (position - 23) % 27 == 0) && position < 71)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_center_right_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_center_right_cell));
         else if((position - 26) % 27 == 0 && position < 72)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_right_end_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_right_end_cell));
         else if(((position - 18) % 27 == 0 || (position - 21) % 27 == 0 || (position - 24) % 27 == 0) && position > 71)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_left_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_left_cell));
         else if(((position - 19) % 27 == 0 || (position - 22) % 27 == 0 || (position - 25) % 27 == 0) && position > 71)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_center_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_center_cell));
         else if(((position - 20) % 27 == 0 || (position - 23) % 27 == 0 || (position - 26) % 27 == 0) && position > 71 && position != 80)
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_right_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_right_cell));
         else
-            holder.textView.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_right_end_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_right_end_cell));
 
         if(list.get(position) != 0)
-            holder.textView.setText(String.valueOf(list.get(position)));
+        {
+            holder.cell.setClickable(false);
+            holder.cell.setText(String.valueOf(list.get(position)));
+        }
+
+        holder.cell.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(list.get(position) == 0)
+                {
+                    v.setFocusable(true);
+                    v.setFocusableInTouchMode(true);
+                }
+
+                return false;
+            }
+        });
     }
 
     @Override
@@ -74,11 +93,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
+        private EditText cell;
 
         ViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.textview);
+            cell = itemView.findViewById(R.id.cell);
         }
     }
 }
