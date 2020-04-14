@@ -2,6 +2,7 @@ package com.example.sudoku;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -69,7 +70,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         if(list.get(position) != 0)
         {
-            holder.cell.setClickable(false);
+            holder.cell.setInputType(InputType.TYPE_NULL);
             holder.cell.setText(String.valueOf(list.get(position)));
         }
 
