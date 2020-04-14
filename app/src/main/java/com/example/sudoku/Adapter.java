@@ -56,7 +56,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         else if(((position - 19) % 27 == 0 || (position - 22) % 27 == 0 || (position - 25) % 27 == 0) && position < 72)
             holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_center_cell));
         else if(((position - 20) % 27 == 0 || (position - 23) % 27 == 0) && position < 71)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_center_right_cell));
+            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_right_cell));
         else if((position - 26) % 27 == 0 && position < 72)
             holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_right_end_cell));
         else if(((position - 18) % 27 == 0 || (position - 21) % 27 == 0 || (position - 24) % 27 == 0) && position > 71)
