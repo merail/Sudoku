@@ -9,11 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class BottomBarFragment extends Fragment {
-
-    static BottomBarFragment newInstance()
+public class TopBarFragment extends Fragment {
+    static TopBarFragment newInstance()
     {
-        BottomBarFragment fragment = new BottomBarFragment();
+        TopBarFragment fragment = new TopBarFragment();
 
         return fragment;
     }
@@ -21,7 +20,7 @@ public class BottomBarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_bottombar, container, false);
+        View v = inflater.inflate(R.layout.fragment_topbar, container, false);
 
 
         return v;

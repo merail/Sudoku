@@ -37,9 +37,13 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        MatrixFragment matrixFragment = MatrixFragment.newInstance();
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().add(R.id.mainLayout, matrixFragment).commit();
+        TopBarFragment topBarFragment = TopBarFragment.newInstance();
+        manager.beginTransaction().add(R.id.topLayout, topBarFragment).commit();
+        MatrixFragment matrixFragment = MatrixFragment.newInstance();
+        manager.beginTransaction().add(R.id.centerLayout, matrixFragment).commit();
+        BottomBarFragment bottomBarFragment = BottomBarFragment.newInstance();
+        manager.beginTransaction().add(R.id.bottomLayout, bottomBarFragment).commit();
     }
 
     @Override
