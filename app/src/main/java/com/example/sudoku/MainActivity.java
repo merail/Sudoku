@@ -1,17 +1,11 @@
 package com.example.sudoku;
 
-import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private int currentApiVersion;
@@ -45,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         MatrixFragment matrixFragment = MatrixFragment.newInstance();
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().add(R.id.main, matrixFragment).commit();
+        manager.beginTransaction().add(R.id.mainLayout, matrixFragment).commit();
     }
 
     @Override

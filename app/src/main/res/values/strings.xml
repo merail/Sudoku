@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Sudoku</string>
+    <string name="saved">Saved</string>
+    <string name="hint">Hint</string>
+    <string name="stats">Stats</string>
+    <string name="complexity">Complexity</string>
+    <string name="new_game">New Game</string>
+    <string name="save">Save</string>
 </resources>
