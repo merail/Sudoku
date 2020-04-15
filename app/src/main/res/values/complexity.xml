@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="complexity_array">
+        <item>One star</item>
+        <item>Two star</item>
+        <item>Three star</item>
+        <item>Four star</item>
+        <item>Five star</item>
+    </string-array>
+</resources>
