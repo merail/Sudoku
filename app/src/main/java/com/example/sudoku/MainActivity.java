@@ -40,10 +40,17 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         TopBarFragment topBarFragment = TopBarFragment.newInstance();
         manager.beginTransaction().add(R.id.topLayout, topBarFragment).commit();
-        MatrixFragment matrixFragment = MatrixFragment.newInstance();
+        final MatrixFragment matrixFragment = MatrixFragment.newInstance();
         manager.beginTransaction().add(R.id.centerLayout, matrixFragment).commit();
+        ComplexityChangeInterface complexityChangeInterface = new ComplexityChangeInterface() {
+            @Override
+            public void changeComplexity(int complexity) {
+                matrixFragment.changeComplexity(complexity);
+            }
+        };
         BottomBarFragment bottomBarFragment = BottomBarFragment.newInstance();
         manager.beginTransaction().add(R.id.bottomLayout, bottomBarFragment).commit();
+        bottomBarFragment.bindComplexityChangeInterface(complexityChangeInterface);
     }
 
     @Override

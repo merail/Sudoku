@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 public class MatrixFragment extends Fragment {
 
+    private RecyclerView mRecycler;
+
     static MatrixFragment newInstance()
     {
         MatrixFragment fragment = new MatrixFragment();
@@ -27,19 +29,20 @@ public class MatrixFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_matrix, container, false);
 
-        RecyclerView recycler = v.findViewById(R.id.recyclerView);
-        recycler.setHasFixedSize(true);
+        mRecycler = v.findViewById(R.id.recyclerView);
+        mRecycler.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 9, GridLayoutManager.VERTICAL, false);
-        recycler.setLayoutManager(manager);
-
-        int K = 10;
-        Sudoku sudoku = new Sudoku(K);
-        sudoku.fillValues();
-        sudoku.printSudoku();
-        ArrayList<Integer> list = sudoku.getSudoku();
-        Adapter adapter = new Adapter(list, getContext());
-        recycler.setAdapter(adapter);
+        mRecycler.setLayoutManager(manager);
 
         return v;
+    }
+
+    void changeComplexity(int complexity)
+    {
+        Sudoku sudoku = new Sudoku(complexity);
+        sudoku.fillValues();
+        ArrayList<Integer> list = sudoku.getSudoku();
+        Adapter adapter = new Adapter(list, getContext());
+        mRecycler.setAdapter(adapter);
     }
 }

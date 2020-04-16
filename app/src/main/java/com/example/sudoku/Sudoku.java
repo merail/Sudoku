@@ -11,9 +11,26 @@ class Sudoku {
     private int K; // No. Of missing digits
 
     // Constructor
-    Sudoku(int K) {
+    Sudoku(int complexity) {
         this.N = 9;
-        this.K = K;
+        switch (complexity)
+        {
+            case 0:
+                this.K = 37;
+                break;
+            case 1:
+                this.K = 41;
+                break;
+            case 2:
+                this.K = 45;
+                break;
+            case 3:
+                this.K = 49;
+                break;
+            case 4:
+                this.K = 53;
+                break;
+        }
 
         SRN = 3;
 
