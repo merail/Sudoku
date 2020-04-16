@@ -8,40 +8,39 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity {
-    private int currentApiVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        currentApiVersion = android.os.Build.VERSION.SDK_INT;
-
-        final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-
-        if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
-            getWindow().getDecorView().setSystemUiVisibility(flags);
+        if (Utils.currentApiVersion >= Build.VERSION_CODES.KITKAT) {
+            getWindow().getDecorView().setSystemUiVisibility(Utils.systemUiFlags);
             final View decorView = getWindow().getDecorView();
             decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
                 @Override
                 public void onSystemUiVisibilityChange(int visibility) {
                     if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                        decorView.setSystemUiVisibility(flags);
+                        decorView.setSystemUiVisibility(Utils.systemUiFlags);
                     }
                 }
             });
         }
 
-        FragmentManager manager = getSupportFragmentManager();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
         TopBarFragment topBarFragment = TopBarFragment.newInstance();
-        manager.beginTransaction().add(R.id.topLayout, topBarFragment).commit();
+        fragmentManager.beginTransaction()
+                .add(R.id.topLayout, topBarFragment)
+                .addToBackStack(null)
+                .commit();
+
         final MatrixFragment matrixFragment = MatrixFragment.newInstance();
-        manager.beginTransaction().add(R.id.centerLayout, matrixFragment).commit();
+        fragmentManager.beginTransaction()
+                .add(R.id.centerLayout, matrixFragment)
+                .addToBackStack(null)
+                .commit();
+
         ComplexityChangeInterface complexityChangeInterface = new ComplexityChangeInterface() {
             @Override
             public void changeComplexity(int complexity) {
@@ -49,7 +48,10 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         BottomBarFragment bottomBarFragment = BottomBarFragment.newInstance();
-        manager.beginTransaction().add(R.id.bottomLayout, bottomBarFragment).commit();
+        fragmentManager.beginTransaction()
+                .add(R.id.bottomLayout, bottomBarFragment)
+                .addToBackStack(null)
+                .commit();
         bottomBarFragment.bindComplexityChangeInterface(complexityChangeInterface);
     }
 
@@ -57,15 +59,9 @@ public class MainActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus)
     {
         super.onWindowFocusChanged(hasFocus);
-        if(currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus)
+        if(Utils.currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus)
         {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+            getWindow().getDecorView().setSystemUiVisibility(Utils.systemUiFlags);
         }
     }
 }
