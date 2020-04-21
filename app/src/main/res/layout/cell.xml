@@ -10,6 +10,7 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         android:focusable="false"
-        android:inputType="number" />
+        android:inputType="number"
+        android:maxLength="1"/>
 
 </RelativeLayout>
