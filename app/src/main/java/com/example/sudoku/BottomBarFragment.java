@@ -8,18 +8,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import java.util.Objects;
 
 public class BottomBarFragment extends Fragment {
 
-    private ComplexityChangeInterface mComplexityChangeInterface;
+    private GameCreateInterface mGameCreateInterface;
+    private NewGameDialogCreateInterface mNewGameDialogCreateInterface;
+
+    void bindNewGameInterface(NewGameDialogCreateInterface newGameDialogCreateInterface)
+    {
+        mNewGameDialogCreateInterface = newGameDialogCreateInterface;
+    }
 
     static BottomBarFragment newInstance()
     {
@@ -28,9 +32,9 @@ public class BottomBarFragment extends Fragment {
         return fragment;
     }
 
-    void bindComplexityChangeInterface(ComplexityChangeInterface complexityChangeInterface)
+    void bindComplexityChangeInterface(GameCreateInterface gameCreateInterface)
     {
-        mComplexityChangeInterface = complexityChangeInterface;
+        mGameCreateInterface = gameCreateInterface;
     }
 
     @Nullable
@@ -46,7 +50,7 @@ public class BottomBarFragment extends Fragment {
         complexitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mComplexityChangeInterface.changeComplexity(position);
+                mGameCreateInterface.createGame(position);
             }
 
             @Override
@@ -59,9 +63,7 @@ public class BottomBarFragment extends Fragment {
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getChildFragmentManager();
-                NewGameDialogFragment myDialogFragment = new NewGameDialogFragment();
-                myDialogFragment.show(manager, "myDialog");
+                mNewGameDialogCreateInterface.createNewGameDialog();
             }
         });
 

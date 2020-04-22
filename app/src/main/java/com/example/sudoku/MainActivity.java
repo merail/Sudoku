@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity {
+    private int mComplexity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +42,26 @@ public class MainActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
 
-        ComplexityChangeInterface complexityChangeInterface = new ComplexityChangeInterface() {
+        GameCreateInterface gameCreateInterface = new GameCreateInterface() {
             @Override
-            public void changeComplexity(int complexity) {
+            public void createGame(int complexity) {
+                mComplexity = complexity;
                 matrixFragment.changeComplexity(complexity);
+            }
+        };
+        final NewGameSetInterface newGameSetInterface = new NewGameSetInterface() {
+            @Override
+            public void setNewGame() {
+                matrixFragment.changeComplexity(mComplexity);
+            }
+        };
+        NewGameDialogCreateInterface newGameDialogCreateInterface = new NewGameDialogCreateInterface() {
+            @Override
+            public void createNewGameDialog() {
+                NewGameDialogFragment newGameDialogFragment = new NewGameDialogFragment();
+                newGameDialogFragment.show(fragmentManager, "newGameDialog");
+
+                newGameDialogFragment.bindNewGameSetInterface(newGameSetInterface);
             }
         };
         BottomBarFragment bottomBarFragment = BottomBarFragment.newInstance();
@@ -52,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.bottomLayout, bottomBarFragment)
                 .addToBackStack(null)
                 .commit();
-        bottomBarFragment.bindComplexityChangeInterface(complexityChangeInterface);
+        bottomBarFragment.bindComplexityChangeInterface(gameCreateInterface);
+        bottomBarFragment.bindNewGameInterface(newGameDialogCreateInterface);
     }
 
     @Override

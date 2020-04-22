@@ -11,6 +11,14 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import java.util.Objects;
 
 public class NewGameDialogFragment extends AppCompatDialogFragment {
+
+    private NewGameSetInterface mNewGameSetInterface;
+
+    public void bindNewGameSetInterface(NewGameSetInterface newGameSetInterface)
+    {
+        mNewGameSetInterface = newGameSetInterface;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -28,6 +36,9 @@ public class NewGameDialogFragment extends AppCompatDialogFragment {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int id) {
+
+                                mNewGameSetInterface.setNewGame();
+
                                 dialog.cancel();
                             }
                         })
