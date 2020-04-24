@@ -41,7 +41,7 @@ public class MatrixFragment extends Fragment {
     {
         Sudoku sudoku = new Sudoku(complexity);
         sudoku.fillValues();
-        ArrayList<Integer> list = sudoku.getSudoku();
+        ArrayList<Integer> list = Sudoku.getSudoku();
         Adapter adapter = new Adapter(list, getContext());
         mRecycler.setAdapter(adapter);
     }

@@ -25,48 +25,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Create a new map of values, where column names are the keys
-        ContentValues values = new ContentValues();
-        values.put(DatabaseContract.Entry.COLUMN_NAME_TITLE, "abc");
-        values.put(DatabaseContract.Entry.COLUMN_NAME_SUBTITLE, "sudoku");
-
-        // Insert the new row, returning the primary key value of the new row
-        Database.get(this).getWriteDatabase().insert(DatabaseContract.Entry.TABLE_NAME, null, values);
-
-        // Define a projection that specifies which columns from the database
-        // you will actually use after this query.
-        String[] projection = {
-                BaseColumns._ID,
-                DatabaseContract.Entry.COLUMN_NAME_TITLE,
-                DatabaseContract.Entry.COLUMN_NAME_SUBTITLE
-        };
-
-        // Filter results WHERE "title" = 'My Title'
-        String selection = DatabaseContract.Entry.COLUMN_NAME_TITLE + " = ?";
-        String[] selectionArgs = { "title" };
-
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                DatabaseContract.Entry.COLUMN_NAME_SUBTITLE + " DESC";
-
-        Cursor cursor = Database.get(this).getWriteDatabase().query(
-                DatabaseContract.Entry.TABLE_NAME,   // The table to query
-                projection,             // The array of columns to return (pass null to get all)
-                selection,              // The columns for the WHERE clause
-                selectionArgs,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                sortOrder               // The sort order
-        );
-
-        List itemIds = new ArrayList<>();
-        while(cursor.moveToNext()) {
-            String itemId = cursor.getString(
-                    cursor.getColumnIndexOrThrow(DatabaseContract.Entry.COLUMN_NAME_SUBTITLE));
-            itemIds.add(itemId);
-        }
-        cursor.close();
-        Log.d("itemIds", String.valueOf(itemIds.get(0)));
+//        // Define a projection that specifies which columns from the database
+//        // you will actually use after this query.
+//        String[] projection = {
+//                BaseColumns._ID,
+//                DatabaseContract.Entry.COLUMN_NAME_TITLE,
+//                DatabaseContract.Entry.COLUMN_NAME_SUBTITLE
+//        };
+//
+//        // Filter results WHERE "title" = 'My Title'
+//        String selection = DatabaseContract.Entry.COLUMN_NAME_TITLE + " = ?";
+//        String[] selectionArgs = { "title" };
+//
+//        // How you want the results sorted in the resulting Cursor
+//        String sortOrder =
+//                DatabaseContract.Entry.COLUMN_NAME_SUBTITLE + " DESC";
+//
+//        Cursor cursor = Database.get(this).getReadDatabase().query(
+//                DatabaseContract.Entry.TABLE_NAME,   // The table to query
+//                projection,             // The array of columns to return (pass null to get all)
+//                selection,              // The columns for the WHERE clause
+//                selectionArgs,          // The values for the WHERE clause
+//                null,                   // don't group the rows
+//                null,                   // don't filter by row groups
+//                sortOrder               // The sort order
+//        );
+//
+//        List itemIds = new ArrayList<>();
+//        while(cursor.moveToNext()) {
+//            String itemId = cursor.getString(
+//                    cursor.getColumnIndexOrThrow(DatabaseContract.Entry.COLUMN_NAME_SUBTITLE));
+//            itemIds.add(itemId);
+//        }
+//        cursor.close();
+//        Log.d("itemIds", String.valueOf(itemIds.get(0)));
 
         if (Utils.currentApiVersion >= Build.VERSION_CODES.KITKAT) {
             getWindow().getDecorView().setSystemUiVisibility(Utils.systemUiFlags);

@@ -4,8 +4,8 @@ package com.example.sudoku;
 import java.util.ArrayList;
 
 class Sudoku {
-    private int[][] mSudokuMatrix;
-    private ArrayList<Integer> mSudokuList;
+    private static int[][] mSudokuMatrix;
+    private static ArrayList<Integer> mSudokuList;
     private final int N; // number of columns/rows.
     private final int SRN; // square root of N
     private int K; // No. Of missing digits
@@ -182,7 +182,7 @@ class Sudoku {
         System.out.println();
     }
 
-    ArrayList<Integer> getSudoku() {
+    static ArrayList<Integer> getSudoku() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 mSudokuList.add(mSudokuMatrix[i][j]);
