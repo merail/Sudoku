@@ -13,8 +13,7 @@ class Sudoku {
     // Constructor
     Sudoku(int complexity) {
         this.N = 9;
-        switch (complexity)
-        {
+        switch (complexity) {
             case 0:
                 this.K = 37;
                 break;
@@ -36,6 +35,16 @@ class Sudoku {
 
         mSudokuMatrix = new int[N][N];
         mSudokuList = new ArrayList<>();
+    }
+
+    static ArrayList<Integer> getSudoku() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                mSudokuList.add(mSudokuMatrix[i][j]);
+            }
+        }
+
+        return mSudokuList;
     }
 
     // Sudoku Generator
@@ -164,7 +173,7 @@ class Sudoku {
             if (j != 0)
                 j = j - 1;
 
-            System.out.println(i+" "+j);
+            System.out.println(i + " " + j);
             if (mSudokuMatrix[i][j] != 0) {
                 count--;
                 mSudokuMatrix[i][j] = 0;
@@ -180,15 +189,5 @@ class Sudoku {
             System.out.println();
         }
         System.out.println();
-    }
-
-    static ArrayList<Integer> getSudoku() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                mSudokuList.add(mSudokuMatrix[i][j]);
-            }
-        }
-
-        return mSudokuList;
     }
 }

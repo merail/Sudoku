@@ -1,13 +1,14 @@
 package com.example.sudoku;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.util.Log;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.sudoku.database.Database;
 import com.example.sudoku.database.DatabaseContract;
@@ -45,7 +46,7 @@ public class SavedActivity extends AppCompatActivity {
 
         // Filter results WHERE "title" = 'My Title'
         String selection = DatabaseContract.Entry.COLUMN_NAME_TITLE + " = ?";
-        String[] selectionArgs = { "title" };
+        String[] selectionArgs = {"title"};
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
@@ -62,22 +63,32 @@ public class SavedActivity extends AppCompatActivity {
         );
 
         List itemIds = new ArrayList<>();
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             String itemId = cursor.getString(
                     cursor.getColumnIndexOrThrow(DatabaseContract.Entry.COLUMN_NAME_TITLE));
             itemIds.add(itemId);
         }
         cursor.close();
-        for(Object i: itemIds)
+        for (Object i : itemIds)
             Log.d("itemIds", (String) i);
+
+        Sudoku sudoku = new Sudoku(0);
+        sudoku.fillValues();
+        ArrayList<Integer> list = Sudoku.getSudoku();
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        final MatrixFragment matrixFragment = MatrixFragment.newInstance(String.valueOf(list));
+        fragmentManager.beginTransaction()
+                .add(R.id.fragmentLayout, matrixFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus)
-    {
+    public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if(Utils.currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus)
-        {
+        if (Utils.currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus) {
             getWindow().getDecorView().setSystemUiVisibility(Utils.systemUiFlags);
         }
     }

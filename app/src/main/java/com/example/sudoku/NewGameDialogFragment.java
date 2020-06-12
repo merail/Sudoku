@@ -14,8 +14,7 @@ public class NewGameDialogFragment extends AppCompatDialogFragment {
 
     private NewGameSetInterface mNewGameSetInterface;
 
-    public void bindNewGameSetInterface(NewGameSetInterface newGameSetInterface)
-    {
+    public void bindNewGameSetInterface(NewGameSetInterface newGameSetInterface) {
         mNewGameSetInterface = newGameSetInterface;
     }
 
@@ -23,7 +22,7 @@ public class NewGameDialogFragment extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
-        builder.setMessage("Choose your destiny")
+        builder.setMessage("Are you sure?")
                 .setCancelable(true)
                 .setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {

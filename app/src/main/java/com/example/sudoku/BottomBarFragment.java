@@ -3,7 +3,6 @@ package com.example.sudoku;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 public class BottomBarFragment extends Fragment {
@@ -31,20 +29,17 @@ public class BottomBarFragment extends Fragment {
     private GameCreateInterface mGameCreateInterface;
     private NewGameDialogCreateInterface mNewGameDialogCreateInterface;
 
-    void bindNewGameInterface(NewGameDialogCreateInterface newGameDialogCreateInterface)
-    {
-        mNewGameDialogCreateInterface = newGameDialogCreateInterface;
-    }
-
-    static BottomBarFragment newInstance()
-    {
+    static BottomBarFragment newInstance() {
         BottomBarFragment fragment = new BottomBarFragment();
 
         return fragment;
     }
 
-    void bindComplexityChangeInterface(GameCreateInterface gameCreateInterface)
-    {
+    void bindNewGameInterface(NewGameDialogCreateInterface newGameDialogCreateInterface) {
+        mNewGameDialogCreateInterface = newGameDialogCreateInterface;
+    }
+
+    void bindComplexityChangeInterface(GameCreateInterface gameCreateInterface) {
         mGameCreateInterface = gameCreateInterface;
     }
 
