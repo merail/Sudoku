@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -35,38 +34,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        if (position % 27 == 0 || (position - 3) % 27 == 0 || (position - 6) % 27 == 0)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_left_cell));
-        else if (((position - 1) % 27 == 0 || (position - 4) % 27 == 0 || (position - 7) % 27 == 0) && position < 72)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_center_cell));
-        else if (((position - 2) % 27 == 0 || (position - 5) % 27 == 0) && position < 72)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_right_cell));
-        else if ((position - 8) % 27 == 0)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_top_right_end_cell));
-        else if ((position - 9) % 27 == 0 || (position - 12) % 27 == 0 || (position - 15) % 27 == 0)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_left_cell));
-        else if (((position - 10) % 27 == 0 || (position - 13) % 27 == 0 || (position - 16) % 27 == 0))
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_center_cell));
-        else if ((position - 11) % 27 == 0 || (position - 14) % 27 == 0)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_right_cell));
-        else if ((position - 17) % 27 == 0)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_center_right_end_cell));
-        else if (((position - 18) % 27 == 0 || (position - 21) % 27 == 0 || (position - 24) % 27 == 0) && position < 72)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_left_cell));
-        else if (((position - 19) % 27 == 0 || (position - 22) % 27 == 0 || (position - 25) % 27 == 0) && position < 72)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_center_cell));
-        else if (((position - 20) % 27 == 0 || (position - 23) % 27 == 0) && position < 71)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_right_cell));
-        else if ((position - 26) % 27 == 0 && position < 72)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_right_end_cell));
-        else if (((position - 18) % 27 == 0 || (position - 21) % 27 == 0 || (position - 24) % 27 == 0) && position > 71)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_left_cell));
-        else if (((position - 19) % 27 == 0 || (position - 22) % 27 == 0 || (position - 25) % 27 == 0) && position > 71)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_center_cell));
-        else if (((position - 20) % 27 == 0 || (position - 23) % 27 == 0 || (position - 26) % 27 == 0) && position > 71 && position != 80)
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_right_cell));
-        else
-            holder.cell.setBackground(ContextCompat.getDrawable(context, R.drawable.border_bottom_end_right_end_cell));
 
         if (list.get(position) != 0) {
             holder.cell.setInputType(InputType.TYPE_NULL);

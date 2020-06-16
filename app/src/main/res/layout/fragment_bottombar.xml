@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/bottom_button"/>
 
     <Button
         android:id="@+id/newGameButton"
@@ -19,7 +20,8 @@
         android:text="@string/new_game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/saveButton"
-        app:layout_constraintStart_toEndOf="@+id/complexitySpinner" />
+        app:layout_constraintStart_toEndOf="@+id/complexitySpinner"
+        android:background="@drawable/bottom_button"/>
 
     <Button
         android:id="@+id/saveButton"
@@ -27,5 +29,6 @@
         android:layout_height="wrap_content"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bottom_button"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
