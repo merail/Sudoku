@@ -12,27 +12,24 @@
         android:id="@+id/savedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/saved"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/top_button"/>
+        android:background="@drawable/saved"/>
 
     <Button
         android:id="@+id/hintButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hint"
         app:layout_constraintEnd_toStartOf="@+id/statsButton"
         app:layout_constraintStart_toEndOf="@+id/savedButton"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/top_button"/>
+        android:background="@drawable/tips"/>
 
     <Button
         android:id="@+id/statsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/stats"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/top_button"/>
+        android:background="@drawable/stats"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

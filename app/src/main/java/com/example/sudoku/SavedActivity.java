@@ -76,13 +76,13 @@ public class SavedActivity extends AppCompatActivity {
         sudoku.fillValues();
         ArrayList<Integer> list = Sudoku.getSudoku();
 
-        final FragmentManager fragmentManager = getSupportFragmentManager();
+        //final FragmentManager fragmentManager = getSupportFragmentManager();
 
-        final MatrixFragment matrixFragment = MatrixFragment.newInstance(String.valueOf(list));
-        fragmentManager.beginTransaction()
-                .add(R.id.fragmentLayout, matrixFragment)
-                .addToBackStack(null)
-                .commit();
+//        final MatrixFragment matrixFragment = MatrixFragment.newInstance(String.valueOf(list));
+//        fragmentManager.beginTransaction()
+//                .add(R.id.fragmentLayout, matrixFragment)
+//                .addToBackStack(null)
+//                .commit();
     }
 
     @Override

@@ -20,10 +20,10 @@ public class TopBarFragment extends Fragment {
         return fragment;
     }
 
-//    public void bindOpenSavedInterface(OpenSavedInterface openSavedInterface)
-//    {
-//        mOpenSavedInterface = openSavedInterface;
-//    }
+    public void bindOpenSavedInterface(OpenSavedInterface openSavedInterface)
+    {
+        mOpenSavedInterface = openSavedInterface;
+    }
 
     @Nullable
     @Override
@@ -34,7 +34,7 @@ public class TopBarFragment extends Fragment {
         savedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mOpenSavedInterface.openSavedFragment();
+                //mOpenSavedInterface.openSavedActivity();
 
                 startActivity(new Intent(getContext(), SavedActivity.class));
             }

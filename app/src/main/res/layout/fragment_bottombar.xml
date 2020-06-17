@@ -8,27 +8,26 @@
     <Spinner
         android:id="@+id/complexitySpinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/bottom_button"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/complexity1"/>
 
     <Button
         android:id="@+id/newGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/new_game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/saveButton"
         app:layout_constraintStart_toEndOf="@+id/complexitySpinner"
-        android:background="@drawable/bottom_button"/>
+        android:background="@drawable/new_game"/>
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/bottom_button"/>
+        android:background="@drawable/save"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

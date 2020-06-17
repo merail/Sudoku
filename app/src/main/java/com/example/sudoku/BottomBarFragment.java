@@ -48,7 +48,7 @@ public class BottomBarFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_bottombar, container, false);
 
-        Spinner complexitySpinner = v.findViewById(R.id.complexitySpinner);
+        final Spinner complexitySpinner = v.findViewById(R.id.complexitySpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()),
                 R.array.complexity_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -57,6 +57,20 @@ public class BottomBarFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mGameCreateInterface.createGame(position);
+                switch (position)
+                {
+                    default:
+                    case 0:
+                        complexitySpinner.setBackgroundResource(R.drawable.complexity1);
+                    case 1:
+                        complexitySpinner.setBackgroundResource(R.drawable.complexity2);
+                    case 2:
+                        complexitySpinner.setBackgroundResource(R.drawable.complexity3);
+                    case 3:
+                        complexitySpinner.setBackgroundResource(R.drawable.complexity4);
+                    case 4:
+                        complexitySpinner.setBackgroundResource(R.drawable.complexity5);
+                }
             }
 
             @Override
@@ -81,10 +95,10 @@ public class BottomBarFragment extends Fragment {
                 ContentValues values = new ContentValues();
 
                 Date date = Calendar.getInstance().getTime();
-                @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+                @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 String strDate = dateFormat.format(date);
 
-                values.put(DatabaseContract.Entry.COLUMN_NAME_TITLE, "title");
+                values.put(DatabaseContract.Entry.COLUMN_NAME_TITLE, strDate);
                 values.put(DatabaseContract.Entry.COLUMN_NAME_SUBTITLE, Sudoku.getSudoku().toString());
 
                 // Insert the new row, returning the primary key value of the new row
