@@ -19,4 +19,10 @@ public class Utils {
             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
             | View.SYSTEM_UI_FLAG_FULLSCREEN
             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+
+    public static final int ONE = 0;
+    public static final int TWO = 1;
+    public static final int THREE = 2;
+    public static final int FOUR = 3;
+    public static final int FIVE = 4;
 }

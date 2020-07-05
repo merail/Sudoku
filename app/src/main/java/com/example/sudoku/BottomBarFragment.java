@@ -20,9 +20,16 @@ import com.example.sudoku.database.DatabaseContract;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+
+import static com.example.sudoku.Utils.FIVE;
+import static com.example.sudoku.Utils.FOUR;
+import static com.example.sudoku.Utils.ONE;
+import static com.example.sudoku.Utils.THREE;
+import static com.example.sudoku.Utils.TWO;
 
 public class BottomBarFragment extends Fragment {
 
@@ -49,28 +56,32 @@ public class BottomBarFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_bottombar, container, false);
 
         final Spinner complexitySpinner = v.findViewById(R.id.complexitySpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()),
-                R.array.complexity_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        complexitySpinner.setAdapter(adapter);
+        final ArrayList<Integer> stars = new ArrayList<>();
+        stars.add(ONE);
+        stars.add(TWO);
+        stars.add(THREE);
+        stars.add(FOUR);
+        stars.add(FIVE);
+        complexitySpinner.setAdapter(new ComplexityAdapter(getContext(), stars));
+        complexitySpinner.setSelection(FIVE);
         complexitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mGameCreateInterface.createGame(position);
-                switch (position)
-                {
-                    default:
-                    case 0:
-                        complexitySpinner.setBackgroundResource(R.drawable.complexity1);
-                    case 1:
-                        complexitySpinner.setBackgroundResource(R.drawable.complexity2);
-                    case 2:
-                        complexitySpinner.setBackgroundResource(R.drawable.complexity3);
-                    case 3:
-                        complexitySpinner.setBackgroundResource(R.drawable.complexity4);
-                    case 4:
-                        complexitySpinner.setBackgroundResource(R.drawable.complexity5);
-                }
+                mGameCreateInterface.createGame((FIVE - 1) - position);
+//                switch (position)
+//                {
+//                    default:
+//                    case 0:
+//                        complexitySpinner.setBackgroundResource(R.drawable.complexity1);
+//                    case 1:
+//                        complexitySpinner.setBackgroundResource(R.drawable.complexity2);
+//                    case 2:
+//                        complexitySpinner.setBackgroundResource(R.drawable.complexity3);
+//                    case 3:
+//                        complexitySpinner.setBackgroundResource(R.drawable.complexity4);
+//                    case 4:
+//                        complexitySpinner.setBackgroundResource(R.drawable.complexity5);
+//                }
             }
 
             @Override

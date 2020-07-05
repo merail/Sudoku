@@ -3,6 +3,12 @@ package com.example.sudoku;
 
 import java.util.ArrayList;
 
+import static com.example.sudoku.Utils.FIVE;
+import static com.example.sudoku.Utils.FOUR;
+import static com.example.sudoku.Utils.ONE;
+import static com.example.sudoku.Utils.THREE;
+import static com.example.sudoku.Utils.TWO;
+
 class Sudoku {
     private static int[][] mSudokuMatrix;
     private static ArrayList<Integer> mSudokuList;
@@ -14,19 +20,19 @@ class Sudoku {
     Sudoku(int complexity) {
         this.N = 9;
         switch (complexity) {
-            case 0:
+            case ONE:
                 this.K = 37;
                 break;
-            case 1:
+            case TWO:
                 this.K = 41;
                 break;
-            case 2:
+            case THREE:
                 this.K = 45;
                 break;
-            case 3:
+            case FOUR:
                 this.K = 49;
                 break;
-            case 4:
+            case FIVE:
                 this.K = 53;
                 break;
         }

@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder> {
 
     private ArrayList<Integer> list;
     private Context context;
 
-    Adapter(ArrayList<Integer> list, Context context) {
+    MatrixAdapter(ArrayList<Integer> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -41,17 +41,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
 
         holder.cell.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (list.get(position) == 0) {
-                    v.setFocusable(true);
-                    v.setFocusableInTouchMode(true);
-                }
-
-                return false;
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (list.get(position) == 0) {
+                v.setFocusable(true);
+                v.setFocusableInTouchMode(true);
             }
-        });
-    }
+
+            return false;
+        }
+    });
+}
 
     @Override
     public int getItemCount() {

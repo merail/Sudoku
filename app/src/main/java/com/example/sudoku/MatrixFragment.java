@@ -44,14 +44,14 @@ public class MatrixFragment extends Fragment {
         Sudoku sudoku = new Sudoku(complexity);
         sudoku.fillValues();
         ArrayList<Integer> list = Sudoku.getSudoku();
-        Adapter adapter = new Adapter(list, getContext());
-        mRecycler.setAdapter(adapter);
+        MatrixAdapter matrixAdapter = new MatrixAdapter(list, getContext());
+        mRecycler.setAdapter(matrixAdapter);
     }
 
     void setList(ArrayList<Integer> list, Context context) {
         if (getContext() != null) {
-            Adapter adapter = new Adapter(list, context);
-            mRecycler.setAdapter(adapter);
+            MatrixAdapter matrixAdapter = new MatrixAdapter(list, context);
+            mRecycler.setAdapter(matrixAdapter);
         }
     }
 }
