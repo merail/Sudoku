@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".MenuActivity"></activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".GameActivity" />
         <activity android:name=".SavedActivity" />
         <activity
             android:name=".SplashActivity"
