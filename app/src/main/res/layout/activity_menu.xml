@@ -34,16 +34,6 @@
             app:layout_constraintTop_toBottomOf="@id/newGameButton" />
 
         <Button
-            android:id="@+id/savedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/saved"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lastGameButton" />
-
-        <Button
             android:id="@+id/statsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +42,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/savedButton" />
+            app:layout_constraintTop_toBottomOf="@id/lastGameButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

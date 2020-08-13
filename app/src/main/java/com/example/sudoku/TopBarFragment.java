@@ -36,7 +36,7 @@ public class TopBarFragment extends Fragment {
             public void onClick(View v) {
                 //mOpenSavedInterface.openSavedActivity();
 
-                startActivity(new Intent(getContext(), SavedActivity.class));
+                //startActivity(new Intent(getContext(), SavedActivity.class));
             }
         });
 
