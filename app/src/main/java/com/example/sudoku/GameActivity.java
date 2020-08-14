@@ -28,6 +28,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_SUBTITLE;
+import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_TITLE;
+import static com.example.sudoku.database.DatabaseContract.Entry.TABLE_NAME;
+
 public class GameActivity extends AppCompatActivity {
     private RecyclerView mRecycler;
     private LottieAnimationView mTips;
@@ -109,20 +113,20 @@ public class GameActivity extends AppCompatActivity {
         // you will actually use after this query.
         String[] projection = {
                 BaseColumns._ID,
-                DatabaseContract.Entry.COLUMN_NAME_TITLE,
-                DatabaseContract.Entry.COLUMN_NAME_SUBTITLE
+                COLUMN_NAME_TITLE,
+                COLUMN_NAME_SUBTITLE
         };
 
         // Filter results WHERE "title" = 'My Title'
-        String selection = DatabaseContract.Entry.COLUMN_NAME_TITLE + " = ?";
+        String selection = COLUMN_NAME_TITLE + " = ?";
         String[] selectionArgs = {"title"};
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                DatabaseContract.Entry.COLUMN_NAME_SUBTITLE + " DESC";
+                COLUMN_NAME_SUBTITLE + " DESC";
 
         Cursor cursor = Database.get(this).getReadDatabase().query(
-                DatabaseContract.Entry.TABLE_NAME,   // The table to query
+                TABLE_NAME,   // The table to query
                 projection,             // The array of columns to return (pass null to get all)
                 null,              // The columns for the WHERE clause
                 null,          // The values for the WHERE clause
@@ -134,7 +138,7 @@ public class GameActivity extends AppCompatActivity {
         String itemId = "";
         while (cursor.moveToNext()) {
             itemId = cursor.getString(
-                    cursor.getColumnIndexOrThrow(DatabaseContract.Entry.COLUMN_NAME_SUBTITLE));
+                    cursor.getColumnIndexOrThrow(COLUMN_NAME_SUBTITLE));
         }
         cursor.close();
         itemId = itemId.replace("[", "");
@@ -153,13 +157,16 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(GameActivity.this, MenuActivity.class));
+        Database.get(this).getReadDatabase().delete(TABLE_NAME,
+                COLUMN_NAME_TITLE + "='lastGame'", null);
 
         ContentValues values = new ContentValues();
 
-        values.put(DatabaseContract.Entry.COLUMN_NAME_TITLE, "lastGame");
-        values.put(DatabaseContract.Entry.COLUMN_NAME_SUBTITLE, mList.toString());
+        values.put(COLUMN_NAME_TITLE, "lastGame");
+        values.put(COLUMN_NAME_SUBTITLE, mList.toString());
 
-        Database.get(getApplicationContext()).getWriteDatabase().insert(DatabaseContract.Entry.TABLE_NAME, null, values);
+        Database.get(getApplicationContext()).getWriteDatabase().insert(TABLE_NAME, null, values);
+
+        startActivity(new Intent(GameActivity.this, MenuActivity.class));
     }
 }

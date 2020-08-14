@@ -7,10 +7,11 @@ public class Database {
     private static Database sDatabase;
     private static SQLiteDatabase readDatabase;
     private static SQLiteDatabase writeDatabase;
+    private DatabaseHelper helper;
 
     private Database(Context context)
     {
-        DatabaseHelper helper = new DatabaseHelper(context);
+        helper = new DatabaseHelper(context);
         readDatabase = helper.getWritableDatabase();
         writeDatabase = helper.getWritableDatabase();
     }
