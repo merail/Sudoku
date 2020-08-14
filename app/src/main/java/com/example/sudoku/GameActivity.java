@@ -142,12 +142,12 @@ public class GameActivity extends AppCompatActivity {
         itemId = itemId.replace(",", "");
         itemId = itemId.replace(" ", "");
 
-        ArrayList<Integer> list = new ArrayList<>();
+        mList = new ArrayList<>();
         for(int i = 0;i < itemId.length();i++)
         {
-            list.add(Integer.parseInt(String.valueOf(itemId.charAt(i))));
+            mList.add(Integer.parseInt(String.valueOf(itemId.charAt(i))));
         }
-        MatrixAdapter matrixAdapter = new MatrixAdapter(list, this);
+        MatrixAdapter matrixAdapter = new MatrixAdapter(mList, this);
         mRecycler.setAdapter(matrixAdapter);
 
 //        Sudoku sudoku = new Sudoku(0);
