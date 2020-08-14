@@ -149,23 +149,17 @@ public class GameActivity extends AppCompatActivity {
         }
         MatrixAdapter matrixAdapter = new MatrixAdapter(mList, this);
         mRecycler.setAdapter(matrixAdapter);
-
-//        Sudoku sudoku = new Sudoku(0);
-//        sudoku.fillValues();
-//        ArrayList<Integer> list = Sudoku.getSudoku();
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        startActivity(new Intent(GameActivity.this, MenuActivity.class));
 
-        // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
 
         values.put(DatabaseContract.Entry.COLUMN_NAME_TITLE, "lastGame");
         values.put(DatabaseContract.Entry.COLUMN_NAME_SUBTITLE, mList.toString());
 
-        // Insert the new row, returning the primary key value of the new row
         Database.get(getApplicationContext()).getWriteDatabase().insert(DatabaseContract.Entry.TABLE_NAME, null, values);
     }
 }
