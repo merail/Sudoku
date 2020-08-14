@@ -1,7 +1,11 @@
 package com.example.sudoku;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,6 +20,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.example.sudoku.Utils.FIVE;
 import static com.example.sudoku.Utils.FOUR;
@@ -29,10 +34,20 @@ public class GameActivity extends AppCompatActivity {
 
     private int mComplexity;
 
+    public static Intent newIntent(Context packageContext, int complexity) {
+        Intent intent = new Intent(packageContext, GameActivity.class);
+
+        intent.putExtra("aaa", complexity);
+
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        mComplexity = (int) Objects.requireNonNull(getIntent()).getSerializableExtra("aaa");
 
         if (Utils.currentApiVersion >= Build.VERSION_CODES.KITKAT) {
             getWindow().getDecorView().setSystemUiVisibility(Utils.systemUiFlags);
@@ -62,10 +77,10 @@ public class GameActivity extends AppCompatActivity {
         RecyclerView.LayoutManager manager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(manager);
 
-        changeComplexity(0);
+        changeComplexity(mComplexity);
 
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-
+//        final FragmentManager fragmentManager = getSupportFragmentManager();
+//
 //        TopBarFragment topBarFragment = TopBarFragment.newInstance();
 //        fragmentManager.beginTransaction()
 //                .add(R.id.topLayout, topBarFragment)
