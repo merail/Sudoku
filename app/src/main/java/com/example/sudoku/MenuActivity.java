@@ -21,6 +21,14 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(new Intent(MenuActivity.this, ComplexityActivity.class));
             }
         });
+
+        Button lastGame = findViewById(R.id.lastGameButton);
+        lastGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(GameActivity.newIntent(getApplicationContext(), -1));
+            }
+        });
     }
 
     @Override

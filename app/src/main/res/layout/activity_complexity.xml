@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/beginner"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/easyButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -26,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/easy"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/normalButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -35,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/normal"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/hardButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -44,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/hard"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/expertButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -1,38 +1,38 @@
 package com.example.sudoku;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.provider.BaseColumns;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
+import com.example.sudoku.database.Database;
+import com.example.sudoku.database.DatabaseContract;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
-
-import static com.example.sudoku.Utils.FIVE;
-import static com.example.sudoku.Utils.FOUR;
-import static com.example.sudoku.Utils.ONE;
-import static com.example.sudoku.Utils.THREE;
-import static com.example.sudoku.Utils.TWO;
 
 public class GameActivity extends AppCompatActivity {
     private RecyclerView mRecycler;
     private LottieAnimationView mTips;
 
-    private int mComplexity;
+    ArrayList<Integer> mList;
 
     public static Intent newIntent(Context packageContext, int complexity) {
         Intent intent = new Intent(packageContext, GameActivity.class);
@@ -47,7 +47,21 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        mComplexity = (int) Objects.requireNonNull(getIntent()).getSerializableExtra("aaa");
+        mRecycler = findViewById(R.id.recyclerView);
+        mRecycler.setHasFixedSize(true);
+        RecyclerView.LayoutManager manager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
+        mRecycler.setLayoutManager(manager);
+
+        int mComplexity = (int) Objects.requireNonNull(getIntent()).getSerializableExtra("aaa");
+
+        if(mComplexity != -1)
+        {
+            createGame(mComplexity);
+        }
+        else
+        {
+            loadGame();
+        }
 
         if (Utils.currentApiVersion >= Build.VERSION_CODES.KITKAT) {
             getWindow().getDecorView().setSystemUiVisibility(Utils.systemUiFlags);
@@ -71,57 +85,6 @@ public class GameActivity extends AppCompatActivity {
                 mTips.playAnimation();
             }
         });
-
-        mRecycler = findViewById(R.id.recyclerView);
-        mRecycler.setHasFixedSize(true);
-        RecyclerView.LayoutManager manager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
-        mRecycler.setLayoutManager(manager);
-
-        changeComplexity(mComplexity);
-
-//        final FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//        TopBarFragment topBarFragment = TopBarFragment.newInstance();
-//        fragmentManager.beginTransaction()
-//                .add(R.id.topLayout, topBarFragment)
-//                .addToBackStack(null)
-//                .commit();
-//
-//        final MatrixFragment matrixFragment = new MatrixFragment();
-//        fragmentManager.beginTransaction()
-//                .add(R.id.centerLayout, matrixFragment)
-//                .addToBackStack(null)
-//                .commit();
-//
-//        GameCreateInterface gameCreateInterface = new GameCreateInterface() {
-//            @Override
-//            public void createGame(int complexity) {
-//                mComplexity = complexity;
-//                matrixFragment.changeComplexity(complexity);
-//            }
-//        };
-//        final NewGameSetInterface newGameSetInterface = new NewGameSetInterface() {
-//            @Override
-//            public void setNewGame() {
-//                matrixFragment.changeComplexity(mComplexity);
-//            }
-//        };
-//        NewGameDialogCreateInterface newGameDialogCreateInterface = new NewGameDialogCreateInterface() {
-//            @Override
-//            public void createNewGameDialog() {
-//                NewGameDialogFragment newGameDialogFragment = new NewGameDialogFragment();
-//                newGameDialogFragment.show(fragmentManager, "newGameDialog");
-//
-//                newGameDialogFragment.bindNewGameSetInterface(newGameSetInterface);
-//            }
-//        };
-//        BottomBarFragment bottomBarFragment = BottomBarFragment.newInstance();
-//        fragmentManager.beginTransaction()
-//                .add(R.id.bottomLayout, bottomBarFragment)
-//                .addToBackStack(null)
-//                .commit();
-//        bottomBarFragment.bindComplexityChangeInterface(gameCreateInterface);
-//        bottomBarFragment.bindNewGameInterface(newGameDialogCreateInterface);
     }
 
     @Override
@@ -132,11 +95,77 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    void changeComplexity(int complexity) {
+    void createGame(int complexity) {
         Sudoku sudoku = new Sudoku(complexity);
         sudoku.fillValues();
-        ArrayList<Integer> list = Sudoku.getSudoku();
+        mList = Sudoku.getSudoku();
+        MatrixAdapter matrixAdapter = new MatrixAdapter(mList, this);
+        mRecycler.setAdapter(matrixAdapter);
+    }
+
+    void loadGame()
+    {
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                BaseColumns._ID,
+                DatabaseContract.Entry.COLUMN_NAME_TITLE,
+                DatabaseContract.Entry.COLUMN_NAME_SUBTITLE
+        };
+
+        // Filter results WHERE "title" = 'My Title'
+        String selection = DatabaseContract.Entry.COLUMN_NAME_TITLE + " = ?";
+        String[] selectionArgs = {"title"};
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                DatabaseContract.Entry.COLUMN_NAME_SUBTITLE + " DESC";
+
+        Cursor cursor = Database.get(this).getReadDatabase().query(
+                DatabaseContract.Entry.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                null,              // The columns for the WHERE clause
+                null,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                sortOrder               // The sort order
+        );
+
+        String itemId = "";
+        while (cursor.moveToNext()) {
+            itemId = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DatabaseContract.Entry.COLUMN_NAME_SUBTITLE));
+        }
+        cursor.close();
+        itemId = itemId.replace("[", "");
+        itemId = itemId.replace("]", "");
+        itemId = itemId.replace(",", "");
+        itemId = itemId.replace(" ", "");
+
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i = 0;i < itemId.length();i++)
+        {
+            list.add(Integer.parseInt(String.valueOf(itemId.charAt(i))));
+        }
         MatrixAdapter matrixAdapter = new MatrixAdapter(list, this);
         mRecycler.setAdapter(matrixAdapter);
+
+//        Sudoku sudoku = new Sudoku(0);
+//        sudoku.fillValues();
+//        ArrayList<Integer> list = Sudoku.getSudoku();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+
+        values.put(DatabaseContract.Entry.COLUMN_NAME_TITLE, "lastGame");
+        values.put(DatabaseContract.Entry.COLUMN_NAME_SUBTITLE, mList.toString());
+
+        // Insert the new row, returning the primary key value of the new row
+        Database.get(getApplicationContext()).getWriteDatabase().insert(DatabaseContract.Entry.TABLE_NAME, null, values);
     }
 }

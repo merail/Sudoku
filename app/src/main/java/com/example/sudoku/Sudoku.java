@@ -172,14 +172,14 @@ class Sudoku {
         while (count != 0) {
             int cellId = randomGenerator(N * N - 1);
 
-            System.out.println(cellId);
+            //System.out.println(cellId);
             // extract coordinates i  and j
             int i = (cellId / N);
             int j = cellId % 9 + 1;
             if (j != 0)
                 j = j - 1;
 
-            System.out.println(i + " " + j);
+            //System.out.println(i + " " + j);
             if (mSudokuMatrix[i][j] != 0) {
                 count--;
                 mSudokuMatrix[i][j] = 0;
