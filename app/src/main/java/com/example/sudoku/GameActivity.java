@@ -1,6 +1,5 @@
 package com.example.sudoku;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,14 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
 import com.example.sudoku.database.Database;
-import com.example.sudoku.database.DatabaseContract;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_SUBTITLE;
@@ -35,6 +27,7 @@ import static com.example.sudoku.database.DatabaseContract.Entry.TABLE_NAME;
 public class GameActivity extends AppCompatActivity {
     private RecyclerView mRecycler;
     private LottieAnimationView mTips;
+    private LottieAnimationView mCancel;
 
     ArrayList<Integer> mList;
 
@@ -51,7 +44,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        mRecycler = findViewById(R.id.recyclerView);
+        mRecycler = findViewById(R.id.matrixRecyclerView);
         mRecycler.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(manager);
@@ -87,6 +80,16 @@ public class GameActivity extends AppCompatActivity {
                 mTips.setRepeatMode(LottieDrawable.RESTART);
                 mTips.setRepeatCount(1);
                 mTips.playAnimation();
+            }
+        });
+
+        mCancel = findViewById(R.id.cancel);
+        mCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCancel.setRepeatMode(LottieDrawable.RESTART);
+                mCancel.setRepeatCount(1);
+                mCancel.playAnimation();
             }
         });
     }

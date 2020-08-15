@@ -29,6 +29,14 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(GameActivity.newIntent(getApplicationContext(), -1));
             }
         });
+
+        Button statistics = findViewById(R.id.statsButton);
+        statistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuActivity.this, StatisticsActivity.class));
+            }
+        });
     }
 
     @Override

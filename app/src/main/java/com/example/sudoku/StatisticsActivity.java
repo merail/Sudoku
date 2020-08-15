@@ -9,16 +9,16 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
-public class SudokuActivity extends AppCompatActivity {
+public class StatisticsActivity extends AppCompatActivity {
     private static final int NUM_PAGES = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sudoku);
+        setContentView(R.layout.activity_statistics);
 
-        ViewPager2 mViewPager = findViewById(R.id.sudokuPager);
-        FragmentStateAdapter pagerAdapter = new SudokuPagerAdapter(this);
+        ViewPager2 mViewPager = findViewById(R.id.statisticsPager);
+        FragmentStateAdapter pagerAdapter = new StatisticsPagerAdapter(this);
         mViewPager.setAdapter(pagerAdapter);
     }
 
@@ -26,15 +26,15 @@ public class SudokuActivity extends AppCompatActivity {
      * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
      * sequence.
      */
-    private static class SudokuPagerAdapter extends FragmentStateAdapter {
-        public SudokuPagerAdapter(FragmentActivity fa) {
+    private static class StatisticsPagerAdapter extends FragmentStateAdapter {
+        public StatisticsPagerAdapter(FragmentActivity fa) {
             super(fa);
         }
 
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            return SudokuPageFragment.newInstance(position);
+            return StatisticsPageFragment.newInstance(position);
         }
 
         @Override
