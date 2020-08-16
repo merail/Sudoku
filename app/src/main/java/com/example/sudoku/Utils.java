@@ -12,6 +12,7 @@ public class Utils {
                     Entry.COLUMN_NAME_SUBTITLE + " TEXT)";
     public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + Entry.TABLE_NAME;
+
     static final int currentApiVersion = android.os.Build.VERSION.SDK_INT;
     static final int systemUiFlags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -20,9 +21,13 @@ public class Utils {
             | View.SYSTEM_UI_FLAG_FULLSCREEN
             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
-    public static final int ONE = 0;
-    public static final int TWO = 1;
-    public static final int THREE = 2;
-    public static final int FOUR = 3;
-    public static final int FIVE = 4;
+    public static final int LEVEL_ONE = 0;
+    public static final int LEVEL_TWO = 1;
+    public static final int LEVEL_THREE = 2;
+    public static final int LEVEL_FOUR = 3;
+    public static final int LEVEL_FIVE = 4;
+
+    public static final int NUMBER_OF_LEVELS = 5;
+
+    public static final String ARG_COMPLEXITY = "Complexity";
 }

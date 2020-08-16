@@ -20,21 +20,21 @@ import com.example.sudoku.database.Database;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.example.sudoku.Utils.ARG_COMPLEXITY;
 import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_SUBTITLE;
 import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_TITLE;
 import static com.example.sudoku.database.DatabaseContract.Entry.TABLE_NAME;
 
 public class GameActivity extends AppCompatActivity {
-    private RecyclerView mRecycler;
+    ArrayList<Integer> mMatrixList;
+    private RecyclerView mMatrixRecyclerView;
     private LottieAnimationView mTips;
     private LottieAnimationView mCancel;
-
-    ArrayList<Integer> mList;
 
     public static Intent newIntent(Context packageContext, int complexity) {
         Intent intent = new Intent(packageContext, GameActivity.class);
 
-        intent.putExtra("aaa", complexity);
+        intent.putExtra(ARG_COMPLEXITY, complexity);
 
         return intent;
     }
@@ -44,19 +44,16 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        mRecycler = findViewById(R.id.matrixRecyclerView);
-        mRecycler.setHasFixedSize(true);
+        mMatrixRecyclerView = findViewById(R.id.matrixRecyclerView);
+        mMatrixRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
-        mRecycler.setLayoutManager(manager);
+        mMatrixRecyclerView.setLayoutManager(manager);
 
-        int mComplexity = (int) Objects.requireNonNull(getIntent()).getSerializableExtra("aaa");
+        int complexity = (int) Objects.requireNonNull(getIntent()).getSerializableExtra(ARG_COMPLEXITY);
 
-        if(mComplexity != -1)
-        {
-            createGame(mComplexity);
-        }
-        else
-        {
+        if (complexity != -1) {
+            createGame(complexity);
+        } else {
             loadGame();
         }
 
@@ -105,57 +102,47 @@ public class GameActivity extends AppCompatActivity {
     void createGame(int complexity) {
         Sudoku sudoku = new Sudoku(complexity);
         sudoku.fillValues();
-        mList = Sudoku.getSudoku();
-        MatrixAdapter matrixAdapter = new MatrixAdapter(mList, this);
-        mRecycler.setAdapter(matrixAdapter);
+        mMatrixList = Sudoku.getSudoku();
+        MatrixAdapter matrixAdapter = new MatrixAdapter(mMatrixList, this);
+        mMatrixRecyclerView.setAdapter(matrixAdapter);
     }
 
-    void loadGame()
-    {
-        // Define a projection that specifies which columns from the database
-        // you will actually use after this query.
+    void loadGame() {
         String[] projection = {
                 BaseColumns._ID,
                 COLUMN_NAME_TITLE,
                 COLUMN_NAME_SUBTITLE
         };
 
-        // Filter results WHERE "title" = 'My Title'
-        String selection = COLUMN_NAME_TITLE + " = ?";
-        String[] selectionArgs = {"title"};
-
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                COLUMN_NAME_SUBTITLE + " DESC";
+        String sortOrder = COLUMN_NAME_SUBTITLE + " DESC";
 
         Cursor cursor = Database.get(this).getReadDatabase().query(
-                TABLE_NAME,   // The table to query
-                projection,             // The array of columns to return (pass null to get all)
-                null,              // The columns for the WHERE clause
-                null,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                sortOrder               // The sort order
+                TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                sortOrder
         );
 
-        String itemId = "";
+        String matrix = "";
         while (cursor.moveToNext()) {
-            itemId = cursor.getString(
+            matrix = cursor.getString(
                     cursor.getColumnIndexOrThrow(COLUMN_NAME_SUBTITLE));
         }
         cursor.close();
-        itemId = itemId.replace("[", "");
-        itemId = itemId.replace("]", "");
-        itemId = itemId.replace(",", "");
-        itemId = itemId.replace(" ", "");
+        matrix = matrix.replace("[", "");
+        matrix = matrix.replace("]", "");
+        matrix = matrix.replace(",", "");
+        matrix = matrix.replace(" ", "");
 
-        mList = new ArrayList<>();
-        for(int i = 0;i < itemId.length();i++)
-        {
-            mList.add(Integer.parseInt(String.valueOf(itemId.charAt(i))));
+        mMatrixList = new ArrayList<>();
+        for (int i = 0; i < matrix.length(); i++) {
+            mMatrixList.add(Integer.parseInt(String.valueOf(matrix.charAt(i))));
         }
-        MatrixAdapter matrixAdapter = new MatrixAdapter(mList, this);
-        mRecycler.setAdapter(matrixAdapter);
+        MatrixAdapter matrixAdapter = new MatrixAdapter(mMatrixList, this);
+        mMatrixRecyclerView.setAdapter(matrixAdapter);
     }
 
     @Override
@@ -166,7 +153,7 @@ public class GameActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_NAME_TITLE, "lastGame");
-        values.put(COLUMN_NAME_SUBTITLE, mList.toString());
+        values.put(COLUMN_NAME_SUBTITLE, mMatrixList.toString());
 
         Database.get(getApplicationContext()).getWriteDatabase().insert(TABLE_NAME, null, values);
 

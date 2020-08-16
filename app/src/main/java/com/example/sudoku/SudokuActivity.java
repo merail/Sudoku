@@ -9,9 +9,9 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
-public class SudokuActivity extends AppCompatActivity {
-    private static final int NUM_PAGES = 5;
+import static com.example.sudoku.Utils.NUMBER_OF_LEVELS;
 
+public class SudokuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +22,6 @@ public class SudokuActivity extends AppCompatActivity {
         mViewPager.setAdapter(pagerAdapter);
     }
 
-    /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
-     * sequence.
-     */
     private static class SudokuPagerAdapter extends FragmentStateAdapter {
         public SudokuPagerAdapter(FragmentActivity fa) {
             super(fa);
@@ -39,7 +35,7 @@ public class SudokuActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return NUM_PAGES;
+            return NUMBER_OF_LEVELS;
         }
     }
 }

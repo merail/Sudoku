@@ -41,17 +41,17 @@ public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder
         }
 
         holder.cell.setOnTouchListener(new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (list.get(position) == 0) {
-                v.setFocusable(true);
-                v.setFocusableInTouchMode(true);
-            }
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (list.get(position) == 0) {
+                    v.setFocusable(true);
+                    v.setFocusableInTouchMode(true);
+                }
 
-            return false;
-        }
-    });
-}
+                return false;
+            }
+        });
+    }
 
     @Override
     public int getItemCount() {

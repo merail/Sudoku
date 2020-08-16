@@ -8,16 +8,15 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
+import static com.example.sudoku.Utils.ARG_COMPLEXITY;
+
 public class SudokuPageFragment extends Fragment {
-
-    private static final String ARG_POSITION = "position";
-
-    private int mPosition;
+    private int mComplexity;
 
     public static SudokuPageFragment newInstance(int position) {
         SudokuPageFragment fragment = new SudokuPageFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_POSITION, position);
+        args.putInt(ARG_COMPLEXITY, position);
         fragment.setArguments(args);
         return fragment;
     }
@@ -26,7 +25,7 @@ public class SudokuPageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mPosition = getArguments().getInt(ARG_POSITION);
+            mComplexity = getArguments().getInt(ARG_COMPLEXITY);
         }
     }
 
@@ -36,13 +35,13 @@ public class SudokuPageFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_complexity_page, container, false);
         ImageView mSudokuImageView = v.findViewById(R.id.sudokuImageView);
 
-        if (mPosition == 0)
+        if (mComplexity == 0)
             mSudokuImageView.setImageResource(R.drawable.complexity1);
-        else if (mPosition == 1)
+        else if (mComplexity == 1)
             mSudokuImageView.setImageResource(R.drawable.complexity2);
-        else if (mPosition == 2)
+        else if (mComplexity == 2)
             mSudokuImageView.setImageResource(R.drawable.complexity3);
-        else if (mPosition == 3)
+        else if (mComplexity == 3)
             mSudokuImageView.setImageResource(R.drawable.complexity4);
         else
             mSudokuImageView.setImageResource(R.drawable.complexity5);

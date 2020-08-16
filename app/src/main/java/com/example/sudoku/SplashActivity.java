@@ -1,15 +1,15 @@
 package com.example.sudoku;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,26 +25,22 @@ public class SplashActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.add(4);
-        list.add(5);
-        list.add(6);
-        list.add(7);
-        list.add(8);
-        list.add(9);
-        Collections.shuffle(list);
-        recyclerView.setAdapter(new SplashAdapter(list, this));
+        ArrayList<Integer> matrixList = new ArrayList<>();
+        matrixList.add(1);
+        matrixList.add(2);
+        matrixList.add(3);
+        matrixList.add(4);
+        matrixList.add(5);
+        matrixList.add(6);
+        matrixList.add(7);
+        matrixList.add(8);
+        matrixList.add(9);
+        Collections.shuffle(matrixList);
+        recyclerView.setAdapter(new SplashAdapter(matrixList, this));
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-        Log.d("weighttt", String.valueOf(width));
-        Log.d("weighttt", String.valueOf(height));
+//        Display display = getWindowManager().getDefaultDisplay();
+//        Point size = new Point();
+//        display.getSize(size);
 
         Handler h = new Handler();
         h.postDelayed(new Runnable() {

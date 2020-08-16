@@ -1,12 +1,9 @@
 package com.example.sudoku;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,12 +12,11 @@ import com.airbnb.lottie.LottieAnimationView;
 
 import java.util.ArrayList;
 
-public class SplashAdapter extends RecyclerView.Adapter<SplashAdapter.ViewHolder>  {
+public class SplashAdapter extends RecyclerView.Adapter<SplashAdapter.ViewHolder> {
     private ArrayList<Integer> list;
     private Context context;
 
-    SplashAdapter(ArrayList<Integer> list, Context context)
-    {
+    SplashAdapter(ArrayList<Integer> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -34,7 +30,6 @@ public class SplashAdapter extends RecyclerView.Adapter<SplashAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SplashAdapter.ViewHolder holder, int position) {
-        Log.d("position", String.valueOf(position));
         holder.splash.setAnimation(list.get(position) + ".json");
     }
 

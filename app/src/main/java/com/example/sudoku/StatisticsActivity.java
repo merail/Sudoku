@@ -1,13 +1,13 @@
 package com.example.sudoku;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.os.Bundle;
 
 public class StatisticsActivity extends AppCompatActivity {
     private static final int NUM_PAGES = 5;
@@ -22,10 +22,6 @@ public class StatisticsActivity extends AppCompatActivity {
         mViewPager.setAdapter(pagerAdapter);
     }
 
-    /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
-     * sequence.
-     */
     private static class StatisticsPagerAdapter extends FragmentStateAdapter {
         public StatisticsPagerAdapter(FragmentActivity fa) {
             super(fa);

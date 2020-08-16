@@ -14,24 +14,24 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        Button newGame = findViewById(R.id.newGameButton);
-        newGame.setOnClickListener(new View.OnClickListener() {
+        Button newGameButton = findViewById(R.id.newGameButton);
+        newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuActivity.this, ComplexityActivity.class));
             }
         });
 
-        Button lastGame = findViewById(R.id.lastGameButton);
-        lastGame.setOnClickListener(new View.OnClickListener() {
+        Button lastGameButton = findViewById(R.id.lastGameButton);
+        lastGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(GameActivity.newIntent(getApplicationContext(), -1));
             }
         });
 
-        Button statistics = findViewById(R.id.statsButton);
-        statistics.setOnClickListener(new View.OnClickListener() {
+        Button statisticsButton = findViewById(R.id.statisticsButton);
+        statisticsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuActivity.this, StatisticsActivity.class));

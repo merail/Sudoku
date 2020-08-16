@@ -1,10 +1,16 @@
 package com.example.sudoku;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import static com.example.sudoku.Utils.LEVEL_FIVE;
+import static com.example.sudoku.Utils.LEVEL_FOUR;
+import static com.example.sudoku.Utils.LEVEL_ONE;
+import static com.example.sudoku.Utils.LEVEL_THREE;
+import static com.example.sudoku.Utils.LEVEL_TWO;
 
 public class ComplexityActivity extends AppCompatActivity {
 
@@ -17,7 +23,7 @@ public class ComplexityActivity extends AppCompatActivity {
         beginnerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(GameActivity.newIntent(getApplicationContext(), 0));
+                startActivity(GameActivity.newIntent(getApplicationContext(), LEVEL_ONE));
             }
         });
 
@@ -25,7 +31,7 @@ public class ComplexityActivity extends AppCompatActivity {
         easyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(GameActivity.newIntent(getApplicationContext(), 1));
+                startActivity(GameActivity.newIntent(getApplicationContext(), LEVEL_TWO));
             }
         });
 
@@ -33,7 +39,7 @@ public class ComplexityActivity extends AppCompatActivity {
         normalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(GameActivity.newIntent(getApplicationContext(), 2));
+                startActivity(GameActivity.newIntent(getApplicationContext(), LEVEL_THREE));
             }
         });
 
@@ -41,7 +47,7 @@ public class ComplexityActivity extends AppCompatActivity {
         hardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(GameActivity.newIntent(getApplicationContext(), 3));
+                startActivity(GameActivity.newIntent(getApplicationContext(), LEVEL_FOUR));
             }
         });
 
@@ -49,7 +55,7 @@ public class ComplexityActivity extends AppCompatActivity {
         expertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(GameActivity.newIntent(getApplicationContext(), 4));
+                startActivity(GameActivity.newIntent(getApplicationContext(), LEVEL_FIVE));
             }
         });
     }

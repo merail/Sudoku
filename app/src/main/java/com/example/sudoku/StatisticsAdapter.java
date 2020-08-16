@@ -2,18 +2,17 @@ package com.example.sudoku;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.text.InputType;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import static com.example.sudoku.Utils.LEVEL_ONE;
+import static com.example.sudoku.Utils.LEVEL_THREE;
+import static com.example.sudoku.Utils.LEVEL_TWO;
 
 public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.ViewHolder> {
     private Context context;
@@ -32,16 +31,15 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull StatisticsAdapter.ViewHolder holder, final int position) {
-        switch(position)
-        {
-            case 0:
-                holder.statistics.setText("Started games");
+        switch (position) {
+            case LEVEL_ONE:
+                holder.statistics.setText(R.string.started_games);
                 break;
-            case 1:
-                holder.statistics.setText("Completed games");
+            case LEVEL_TWO:
+                holder.statistics.setText(R.string.completed_games);
                 break;
-            case 2:
-                holder.statistics.setText("Win rate");
+            case LEVEL_THREE:
+                holder.statistics.setText(R.string.win_rate);
                 break;
         }
     }

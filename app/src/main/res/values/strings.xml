@@ -8,4 +8,12 @@
     <string name="save">Save</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="beginner_complexity">Beginner</string>
+    <string name="easy_complexity">Easy</string>
+    <string name="normal_complexity">Normal</string>
+    <string name="hard_complexity">Hard</string>
+    <string name="expert_complexity">Expert</string>
+    <string name="started_games">Started games</string>
+    <string name="completed_games">Completed games</string>
+    <string name="win_rate">Win rate</string>
 </resources>
