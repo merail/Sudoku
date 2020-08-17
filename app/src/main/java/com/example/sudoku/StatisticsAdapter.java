@@ -10,9 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.example.sudoku.Utils.LEVEL_ONE;
-import static com.example.sudoku.Utils.LEVEL_THREE;
-import static com.example.sudoku.Utils.LEVEL_TWO;
+import com.example.sudoku.database.Database;
 
 public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.ViewHolder> {
     private Context context;
@@ -32,30 +30,39 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull StatisticsAdapter.ViewHolder holder, final int position) {
         switch (position) {
-            case LEVEL_ONE:
+            case 0:
                 holder.statistics.setText(R.string.started_games);
+                holder.value.setText(Database.get(context).readData("startedGames"));
                 break;
-            case LEVEL_TWO:
+            case 1:
                 holder.statistics.setText(R.string.completed_games);
                 break;
-            case LEVEL_THREE:
+            case 2:
                 holder.statistics.setText(R.string.win_rate);
+                break;
+            case 3:
+                holder.statistics.setText(R.string.best_time);
+                break;
+            case 4:
+                holder.statistics.setText(R.string.average_time);
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 5;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView statistics;
+        private TextView value;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             statistics = itemView.findViewById(R.id.statistics);
+            value = itemView.findViewById(R.id.value);
         }
     }
 }

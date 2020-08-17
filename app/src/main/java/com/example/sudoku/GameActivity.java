@@ -1,12 +1,9 @@
 package com.example.sudoku;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,9 +18,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import static com.example.sudoku.Utils.ARG_COMPLEXITY;
-import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_SUBTITLE;
-import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_TITLE;
-import static com.example.sudoku.database.DatabaseContract.Entry.TABLE_NAME;
 
 public class GameActivity extends AppCompatActivity {
     ArrayList<Integer> mMatrixList;
@@ -105,33 +99,17 @@ public class GameActivity extends AppCompatActivity {
         mMatrixList = Sudoku.getSudoku();
         MatrixAdapter matrixAdapter = new MatrixAdapter(mMatrixList, this);
         mMatrixRecyclerView.setAdapter(matrixAdapter);
+
+        int startedGames = Integer.parseInt(Database.get(getApplicationContext()).readData("startedGames"));
+
+        Database.get(this).deleteData("startedGames");
+
+        Database.get(this).writeData("startedGames", String.valueOf(startedGames + 1));
     }
 
     void loadGame() {
-        String[] projection = {
-                BaseColumns._ID,
-                COLUMN_NAME_TITLE,
-                COLUMN_NAME_SUBTITLE
-        };
+        String matrix = Database.get(getApplicationContext()).readData("lastGame");
 
-        String sortOrder = COLUMN_NAME_SUBTITLE + " DESC";
-
-        Cursor cursor = Database.get(this).getReadDatabase().query(
-                TABLE_NAME,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                sortOrder
-        );
-
-        String matrix = "";
-        while (cursor.moveToNext()) {
-            matrix = cursor.getString(
-                    cursor.getColumnIndexOrThrow(COLUMN_NAME_SUBTITLE));
-        }
-        cursor.close();
         matrix = matrix.replace("[", "");
         matrix = matrix.replace("]", "");
         matrix = matrix.replace(",", "");
@@ -141,21 +119,16 @@ public class GameActivity extends AppCompatActivity {
         for (int i = 0; i < matrix.length(); i++) {
             mMatrixList.add(Integer.parseInt(String.valueOf(matrix.charAt(i))));
         }
+
         MatrixAdapter matrixAdapter = new MatrixAdapter(mMatrixList, this);
         mMatrixRecyclerView.setAdapter(matrixAdapter);
     }
 
     @Override
     public void onBackPressed() {
-        Database.get(this).getReadDatabase().delete(TABLE_NAME,
-                COLUMN_NAME_TITLE + "='lastGame'", null);
+        Database.get(this).deleteData("lastGame");
 
-        ContentValues values = new ContentValues();
-
-        values.put(COLUMN_NAME_TITLE, "lastGame");
-        values.put(COLUMN_NAME_SUBTITLE, mMatrixList.toString());
-
-        Database.get(getApplicationContext()).getWriteDatabase().insert(TABLE_NAME, null, values);
+        Database.get(getApplicationContext()).writeData("lastGame", mMatrixList.toString());
 
         startActivity(new Intent(GameActivity.this, MenuActivity.class));
     }

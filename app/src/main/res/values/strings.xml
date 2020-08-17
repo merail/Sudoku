@@ -16,4 +16,6 @@
     <string name="started_games">Started games</string>
     <string name="completed_games">Completed games</string>
     <string name="win_rate">Win rate</string>
+    <string name="best_time">Best time</string>
+    <string name="average_time">Average time</string>
 </resources>

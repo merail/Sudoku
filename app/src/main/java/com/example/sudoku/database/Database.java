@@ -1,15 +1,28 @@
 package com.example.sudoku.database;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.BaseColumns;
+
+import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_SUBTITLE;
+import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_TITLE;
+import static com.example.sudoku.database.DatabaseContract.Entry.TABLE_NAME;
 
 public class Database {
     private static Database sDatabase;
     private static SQLiteDatabase readDatabase;
     private static SQLiteDatabase writeDatabase;
 
-    private Database(Context context)
-    {
+    public final String[] projection = {
+            BaseColumns._ID,
+            COLUMN_NAME_TITLE,
+            COLUMN_NAME_SUBTITLE
+    };
+    public final String sortOrder = COLUMN_NAME_SUBTITLE + " DESC";
+
+    private Database(Context context) {
         DatabaseHelper helper = new DatabaseHelper(context);
         readDatabase = helper.getWritableDatabase();
         writeDatabase = helper.getWritableDatabase();
@@ -22,13 +35,41 @@ public class Database {
         return sDatabase;
     }
 
-    public SQLiteDatabase getWriteDatabase()
-    {
-        return writeDatabase;
+    public String readData(String columnTitle) {
+        Cursor cursor = readDatabase.query(
+                TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                sortOrder
+        );
+
+        String record = "";
+        while (cursor.moveToNext()) {
+            String title = cursor.getString(
+                    cursor.getColumnIndexOrThrow(COLUMN_NAME_TITLE));
+            if (title.equals(columnTitle))
+                record = cursor.getString(
+                        cursor.getColumnIndexOrThrow(COLUMN_NAME_SUBTITLE));
+        }
+        cursor.close();
+
+        return record;
     }
 
-    public SQLiteDatabase getReadDatabase()
-    {
-        return readDatabase;
+    public void deleteData(String columnTitle) {
+        readDatabase.delete(TABLE_NAME,
+                COLUMN_NAME_TITLE + "='" + columnTitle + "'", null);
+    }
+
+    public void writeData(String columnTitle, String data) {
+        ContentValues values = new ContentValues();
+
+        values.put(COLUMN_NAME_TITLE, columnTitle);
+        values.put(COLUMN_NAME_SUBTITLE, data);
+
+        writeDatabase.insert(TABLE_NAME, null, values);
     }
 }

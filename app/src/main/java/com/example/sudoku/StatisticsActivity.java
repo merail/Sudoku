@@ -9,9 +9,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-public class StatisticsActivity extends AppCompatActivity {
-    private static final int NUM_PAGES = 5;
+import static com.example.sudoku.Utils.NUMBER_OF_LEVELS;
 
+public class StatisticsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +35,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return NUM_PAGES;
+            return NUMBER_OF_LEVELS;
         }
     }
 }
