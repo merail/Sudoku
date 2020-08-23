@@ -32,19 +32,10 @@ public class SudokuPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_complexity_page, container, false);
-        ImageView mSudokuImageView = v.findViewById(R.id.sudokuImageView);
-
-        if (mComplexity == 0)
-            mSudokuImageView.setImageResource(R.drawable.complexity1);
-        else if (mComplexity == 1)
-            mSudokuImageView.setImageResource(R.drawable.complexity2);
-        else if (mComplexity == 2)
-            mSudokuImageView.setImageResource(R.drawable.complexity3);
-        else if (mComplexity == 3)
-            mSudokuImageView.setImageResource(R.drawable.complexity4);
-        else
-            mSudokuImageView.setImageResource(R.drawable.complexity5);
+        View v = null;
+        //inflater.inflate(R.layout.fragment_complexity_page, container, false);
+        //ImageView mSudokuImageView = v.findViewById(R.id.sudokuImageView);
+        
 
         return v;
     }

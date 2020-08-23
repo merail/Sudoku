@@ -14,9 +14,11 @@ import com.example.sudoku.database.Database;
 
 public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.ViewHolder> {
     private Context context;
+    private  int mComplexity;
 
-    StatisticsAdapter(Context context) {
+    StatisticsAdapter(Context context, int complexity) {
         this.context = context;
+        mComplexity = complexity;
     }
 
     @NonNull
@@ -32,7 +34,11 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
         switch (position) {
             case 0:
                 holder.statistics.setText(R.string.started_games);
-                holder.value.setText(Database.get(context).readData("startedGames"));
+                String startedGames = Database.get(context).readData(mComplexity + "startedGames");
+                if(startedGames.isEmpty())
+                    holder.value.setText("0");
+                else
+                    holder.value.setText(startedGames);
                 break;
             case 1:
                 holder.statistics.setText(R.string.completed_games);

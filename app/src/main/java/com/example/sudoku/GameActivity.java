@@ -25,6 +25,8 @@ public class GameActivity extends AppCompatActivity {
     private LottieAnimationView mTips;
     private LottieAnimationView mCancel;
 
+    int mComplexity;
+
     public static Intent newIntent(Context packageContext, int complexity) {
         Intent intent = new Intent(packageContext, GameActivity.class);
 
@@ -43,10 +45,10 @@ public class GameActivity extends AppCompatActivity {
         RecyclerView.LayoutManager manager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
         mMatrixRecyclerView.setLayoutManager(manager);
 
-        int complexity = (int) Objects.requireNonNull(getIntent()).getSerializableExtra(ARG_COMPLEXITY);
+        mComplexity = (int) Objects.requireNonNull(getIntent()).getSerializableExtra(ARG_COMPLEXITY);
 
-        if (complexity != -1) {
-            createGame(complexity);
+        if (mComplexity != -1) {
+            createGame();
         } else {
             loadGame();
         }
@@ -93,23 +95,30 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    void createGame(int complexity) {
-        Sudoku sudoku = new Sudoku(complexity);
+    void createGame() {
+        Sudoku sudoku = new Sudoku(mComplexity);
         sudoku.fillValues();
         mMatrixList = Sudoku.getSudoku();
         MatrixAdapter matrixAdapter = new MatrixAdapter(mMatrixList, this);
         mMatrixRecyclerView.setAdapter(matrixAdapter);
 
-        int startedGames = Integer.parseInt(Database.get(getApplicationContext()).readData("startedGames"));
+        String readData = Database.get(getApplicationContext()).readData(mComplexity + "startedGames");
+        int startedGames;
+        if(readData.isEmpty())
+            startedGames = 0;
+        else
+            startedGames = Integer.parseInt(readData);
 
-        Database.get(this).deleteData("startedGames");
+        Database.get(this).deleteData(mComplexity + "startedGames");
 
-        Database.get(this).writeData("startedGames", String.valueOf(startedGames + 1));
+        Database.get(this).writeData(mComplexity + "startedGames", String.valueOf((startedGames + 1)));
     }
 
     void loadGame() {
         String matrix = Database.get(getApplicationContext()).readData("lastGame");
 
+        mComplexity = Integer.parseInt(matrix.substring(0,1));
+        matrix = matrix.substring(2);
         matrix = matrix.replace("[", "");
         matrix = matrix.replace("]", "");
         matrix = matrix.replace(",", "");
@@ -128,7 +137,7 @@ public class GameActivity extends AppCompatActivity {
     public void onBackPressed() {
         Database.get(this).deleteData("lastGame");
 
-        Database.get(getApplicationContext()).writeData("lastGame", mMatrixList.toString());
+        Database.get(getApplicationContext()).writeData("lastGame", mComplexity + ":" + mMatrixList.toString());
 
         startActivity(new Intent(GameActivity.this, MenuActivity.class));
     }

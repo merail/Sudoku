@@ -61,7 +61,7 @@ public class StatisticsPageFragment extends Fragment {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         statisticsRecycler.setLayoutManager(manager);
 
-        StatisticsAdapter statisticsAdapter = new StatisticsAdapter(getContext());
+        StatisticsAdapter statisticsAdapter = new StatisticsAdapter(getContext(), mComplexity);
         statisticsRecycler.setAdapter(statisticsAdapter);
 
         return v;
