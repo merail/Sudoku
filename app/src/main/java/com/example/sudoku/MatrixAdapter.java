@@ -3,11 +3,15 @@ package com.example.sudoku;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +37,7 @@ public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         if (list.get(position) != 0) {
             holder.cell.setInputType(InputType.TYPE_NULL);
@@ -47,6 +51,8 @@ public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder
                     v.setFocusable(true);
                     v.setFocusableInTouchMode(true);
                 }
+
+                holder.cell.setBackgroundResource(R.drawable.choosen_cell);
 
                 return false;
             }

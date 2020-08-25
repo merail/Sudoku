@@ -2,6 +2,7 @@ package com.example.sudoku;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,10 @@ import com.example.sudoku.database.Database;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import nl.dionsegijn.konfetti.KonfettiView;
+import nl.dionsegijn.konfetti.models.Shape;
+import nl.dionsegijn.konfetti.models.Size;
 
 import static com.example.sudoku.Utils.ARG_COMPLEXITY;
 
@@ -66,23 +71,20 @@ public class GameActivity extends AppCompatActivity {
             });
         }
 
-        mTips = findViewById(R.id.tips);
-        mTips.setOnClickListener(new View.OnClickListener() {
+        final KonfettiView konfettiView = findViewById(R.id.viewKonfetti);
+        konfettiView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mTips.setRepeatMode(LottieDrawable.RESTART);
-                mTips.setRepeatCount(1);
-                mTips.playAnimation();
-            }
-        });
-
-        mCancel = findViewById(R.id.cancel);
-        mCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCancel.setRepeatMode(LottieDrawable.RESTART);
-                mCancel.setRepeatCount(1);
-                mCancel.playAnimation();
+            public void onClick(final View view) {
+                konfettiView.build()
+                        .addColors(getResources().getColor(R.color.konfettiShade1), getResources().getColor(R.color.mainTheme), getResources().getColor(R.color.konfettiShade2))
+                        .setDirection(0.0, 359.0)
+                        .setSpeed(1f, 5f)
+                        .setFadeOutEnabled(true)
+                        .setTimeToLive(3000L)
+                        .addShapes(Shape.Square.INSTANCE, Shape.Circle.INSTANCE)
+                        .addSizes(new Size(12, 5f))
+                        .setPosition(-50f, konfettiView.getWidth() + 50f, -50f, -50f)
+                        .streamFor(300, 2000L);
             }
         });
     }
