@@ -94,8 +94,10 @@ public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder
 
     @Override
     public void setValue(int value) {
-        list.set(mPosition, value);
-        this.notifyDataSetChanged();
+        if(list.get(mPosition) != 0)
+            list.set(mPosition, value);
+
+        notifyDataSetChanged();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
