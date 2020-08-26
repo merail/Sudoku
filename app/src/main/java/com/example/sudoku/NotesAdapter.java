@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class DigitsAdapter extends RecyclerView.Adapter<DigitsAdapter.ViewHolder> {
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
     private ArrayList<Integer> list;
     private Context context;
 
     private OnSetValueListener onSetValueListener;
 
-    DigitsAdapter(ArrayList<Integer> list, Context context, OnSetValueListener onSetValueListener) {
+    NotesAdapter(ArrayList<Integer> list, Context context, OnSetValueListener onSetValueListener) {
         this.list = list;
         this.context = context;
         this.onSetValueListener = onSetValueListener;
@@ -28,7 +28,7 @@ public class DigitsAdapter extends RecyclerView.Adapter<DigitsAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.digit, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.note, parent, false);
         return new ViewHolder(view);
     }
 
@@ -38,35 +38,35 @@ public class DigitsAdapter extends RecyclerView.Adapter<DigitsAdapter.ViewHolder
         switch (list.get(position))
         {
             case 1:
-                holder.digit.setImageResource(R.drawable.one);
+                holder.note.setImageResource(R.drawable.one);
                 break;
             case 2:
-                holder.digit.setImageResource(R.drawable.two);
+                holder.note.setImageResource(R.drawable.two);
                 break;
             case 3:
-                holder.digit.setImageResource(R.drawable.three);
+                holder.note.setImageResource(R.drawable.three);
                 break;
             case 4:
-                holder.digit.setImageResource(R.drawable.four);
+                holder.note.setImageResource(R.drawable.four);
                 break;
             case 5:
-                holder.digit.setImageResource(R.drawable.five);
+                holder.note.setImageResource(R.drawable.five);
                 break;
             case 6:
-                holder.digit.setImageResource(R.drawable.six);
+                holder.note.setImageResource(R.drawable.six);
                 break;
             case 7:
-                holder.digit.setImageResource(R.drawable.seven);
+                holder.note.setImageResource(R.drawable.seven);
                 break;
             case 8:
-                holder.digit.setImageResource(R.drawable.eight);
+                holder.note.setImageResource(R.drawable.eight);
                 break;
             default:
-                holder.digit.setImageResource(R.drawable.nine);
+                holder.note.setImageResource(R.drawable.nine);
                 break;
         }
 
-        holder.digit.setOnClickListener(new View.OnClickListener() {
+        holder.note.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onSetValueListener.setValue(list.get(position));
@@ -80,11 +80,11 @@ public class DigitsAdapter extends RecyclerView.Adapter<DigitsAdapter.ViewHolder
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView digit;
+        private ImageView note;
 
         ViewHolder(View itemView) {
             super(itemView);
-            digit = itemView.findViewById(R.id.digit);
+            note = itemView.findViewById(R.id.note);
         }
     }
 }

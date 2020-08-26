@@ -25,6 +25,7 @@ import static com.example.sudoku.Utils.DIGITS_LIST;
 
 public class GameActivity extends AppCompatActivity {
     ArrayList<Integer> mMatrixList;
+    private RecyclerView mNotesRecyclerView;
     private RecyclerView mMatrixRecyclerView;
     private RecyclerView mDigitsRecyclerView;
 
@@ -42,6 +43,11 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        mNotesRecyclerView = findViewById(R.id.notesRecyclerView);
+        mNotesRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager notesManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mNotesRecyclerView.setLayoutManager(notesManager);
 
         mMatrixRecyclerView = findViewById(R.id.matrixRecyclerView);
         mMatrixRecyclerView.setHasFixedSize(true);
@@ -107,6 +113,9 @@ public class GameActivity extends AppCompatActivity {
         MatrixAdapter matrixAdapter = new MatrixAdapter(mMatrixList, this);
         mMatrixRecyclerView.setAdapter(matrixAdapter);
 
+        NotesAdapter notesAdapter = new NotesAdapter(DIGITS_LIST, this, matrixAdapter);
+        mNotesRecyclerView.setAdapter(notesAdapter);
+
         DigitsAdapter digitsAdapter = new DigitsAdapter(DIGITS_LIST, this, matrixAdapter);
         mDigitsRecyclerView.setAdapter(digitsAdapter);
 
@@ -139,6 +148,9 @@ public class GameActivity extends AppCompatActivity {
 
         MatrixAdapter matrixAdapter = new MatrixAdapter(mMatrixList, this);
         mMatrixRecyclerView.setAdapter(matrixAdapter);
+
+        NotesAdapter notesAdapter = new NotesAdapter(DIGITS_LIST, this, matrixAdapter);
+        mNotesRecyclerView.setAdapter(notesAdapter);
 
         DigitsAdapter digitsAdapter = new DigitsAdapter(DIGITS_LIST, this, matrixAdapter);
         mDigitsRecyclerView.setAdapter(digitsAdapter);
