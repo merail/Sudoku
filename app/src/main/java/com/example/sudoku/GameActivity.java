@@ -2,17 +2,15 @@ package com.example.sudoku;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.LottieDrawable;
 import com.example.sudoku.database.Database;
 
 import java.util.ArrayList;
@@ -23,12 +21,12 @@ import nl.dionsegijn.konfetti.models.Shape;
 import nl.dionsegijn.konfetti.models.Size;
 
 import static com.example.sudoku.Utils.ARG_COMPLEXITY;
+import static com.example.sudoku.Utils.DIGITS_LIST;
 
 public class GameActivity extends AppCompatActivity {
     ArrayList<Integer> mMatrixList;
     private RecyclerView mMatrixRecyclerView;
-    private LottieAnimationView mTips;
-    private LottieAnimationView mCancel;
+    private RecyclerView mDigitsRecyclerView;
 
     int mComplexity;
 
@@ -47,8 +45,15 @@ public class GameActivity extends AppCompatActivity {
 
         mMatrixRecyclerView = findViewById(R.id.matrixRecyclerView);
         mMatrixRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager manager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
-        mMatrixRecyclerView.setLayoutManager(manager);
+        RecyclerView.LayoutManager matrixManager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
+        mMatrixRecyclerView.setLayoutManager(matrixManager);
+
+        mDigitsRecyclerView = findViewById(R.id.digitsRecyclerView);
+        mDigitsRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager digitsManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mDigitsRecyclerView.setLayoutManager(digitsManager);
+        DigitsAdapter digitsAdapter = new DigitsAdapter(DIGITS_LIST, this);
+        mDigitsRecyclerView.setAdapter(digitsAdapter);
 
         mComplexity = (int) Objects.requireNonNull(getIntent()).getSerializableExtra(ARG_COMPLEXITY);
 

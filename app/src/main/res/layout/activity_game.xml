@@ -5,37 +5,30 @@
     android:layout_height="match_parent"
     android:id="@+id/mainLayout" >
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/matrixRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/matrix_grid"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/centerLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/digitsRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/matrixRecyclerView" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/matrixRecyclerView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/matrix_grid"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <nl.dionsegijn.konfetti.KonfettiView
+    <nl.dionsegijn.konfetti.KonfettiView
             android:id="@+id/viewKonfetti"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="invisible"/>
-
-    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
