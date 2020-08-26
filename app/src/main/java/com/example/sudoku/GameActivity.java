@@ -52,8 +52,6 @@ public class GameActivity extends AppCompatActivity {
         mDigitsRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager digitsManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mDigitsRecyclerView.setLayoutManager(digitsManager);
-        DigitsAdapter digitsAdapter = new DigitsAdapter(DIGITS_LIST, this);
-        mDigitsRecyclerView.setAdapter(digitsAdapter);
 
         mComplexity = (int) Objects.requireNonNull(getIntent()).getSerializableExtra(ARG_COMPLEXITY);
 
@@ -109,6 +107,9 @@ public class GameActivity extends AppCompatActivity {
         MatrixAdapter matrixAdapter = new MatrixAdapter(mMatrixList, this);
         mMatrixRecyclerView.setAdapter(matrixAdapter);
 
+        DigitsAdapter digitsAdapter = new DigitsAdapter(DIGITS_LIST, this, matrixAdapter);
+        mDigitsRecyclerView.setAdapter(digitsAdapter);
+
         String readData = Database.get(getApplicationContext()).readData(mComplexity + "startedGames");
         int startedGames;
         if(readData.isEmpty())
@@ -138,6 +139,9 @@ public class GameActivity extends AppCompatActivity {
 
         MatrixAdapter matrixAdapter = new MatrixAdapter(mMatrixList, this);
         mMatrixRecyclerView.setAdapter(matrixAdapter);
+
+        DigitsAdapter digitsAdapter = new DigitsAdapter(DIGITS_LIST, this, matrixAdapter);
+        mDigitsRecyclerView.setAdapter(digitsAdapter);
     }
 
     @Override

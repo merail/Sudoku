@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,9 +20,12 @@ public class DigitsAdapter extends RecyclerView.Adapter<DigitsAdapter.ViewHolder
     private ArrayList<Integer> list;
     private Context context;
 
-    DigitsAdapter(ArrayList<Integer> list, Context context) {
+    private OnSetValueListener onSetValueListener;
+
+    DigitsAdapter(ArrayList<Integer> list, Context context, OnSetValueListener onSetValueListener) {
         this.list = list;
         this.context = context;
+        this.onSetValueListener = onSetValueListener;
     }
 
     @NonNull
@@ -34,7 +38,43 @@ public class DigitsAdapter extends RecyclerView.Adapter<DigitsAdapter.ViewHolder
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.cell.setText(String.valueOf(list.get(position)));
+        switch (list.get(position))
+        {
+            case 1:
+                holder.cell.setImageResource(R.drawable.one);
+                break;
+            case 2:
+                holder.cell.setImageResource(R.drawable.two);
+                break;
+            case 3:
+                holder.cell.setImageResource(R.drawable.three);
+                break;
+            case 4:
+                holder.cell.setImageResource(R.drawable.four);
+                break;
+            case 5:
+                holder.cell.setImageResource(R.drawable.five);
+                break;
+            case 6:
+                holder.cell.setImageResource(R.drawable.six);
+                break;
+            case 7:
+                holder.cell.setImageResource(R.drawable.seven);
+                break;
+            case 8:
+                holder.cell.setImageResource(R.drawable.eight);
+                break;
+            default:
+                holder.cell.setImageResource(R.drawable.nine);
+                break;
+        }
+
+        holder.cell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSetValueListener.setValue(list.get(position));
+            }
+        });
     }
 
     @Override
@@ -43,7 +83,7 @@ public class DigitsAdapter extends RecyclerView.Adapter<DigitsAdapter.ViewHolder
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private EditText cell;
+        private ImageView cell;
 
         ViewHolder(View itemView) {
             super(itemView);
