@@ -73,11 +73,6 @@ public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder
         holder.cell.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (list.get(position) == 0) {
-                    v.setFocusable(true);
-                    v.setFocusableInTouchMode(true);
-                }
-
                 holder.cell.setBackgroundResource(R.drawable.choosen_cell);
 
                 mPosition = position;
@@ -94,7 +89,7 @@ public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder
 
     @Override
     public void setValue(int value) {
-        if(list.get(mPosition) != 0)
+        if(list.get(mPosition) == 0)
             list.set(mPosition, value);
 
         notifyDataSetChanged();
