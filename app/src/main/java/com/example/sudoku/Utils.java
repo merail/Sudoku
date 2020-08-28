@@ -1,15 +1,9 @@
 package com.example.sudoku;
 
-import android.provider.BaseColumns;
 import android.view.View;
-
-import com.example.sudoku.database.DatabaseContract.Entry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_SUBTITLE;
-import static com.example.sudoku.database.DatabaseContract.Entry.COLUMN_NAME_TITLE;
 
 public class Utils {
     public static final int currentApiVersion = android.os.Build.VERSION.SDK_INT;
@@ -21,7 +15,9 @@ public class Utils {
             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
     public static final ArrayList<Integer> DIGITS_LIST = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
-    public static final ArrayList<String> NAMES_OF_DIGITS_LIST = new ArrayList<>(Arrays.asList("one", "two", "three", "four", "five", "six", "seven", "eight", "nine"));
+    public static final ArrayList<String> NAMES_OF_DIGITS_LIST = new ArrayList<>(Arrays.asList("one", "two", "three",
+            "four", "five", "six",
+            "seven", "eight", "nine"));
 
     public static final int LEVEL_ONE = 0;
     public static final int LEVEL_TWO = 1;

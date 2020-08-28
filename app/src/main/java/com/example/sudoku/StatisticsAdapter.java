@@ -14,7 +14,7 @@ import com.example.sudoku.database.Database;
 
 public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.ViewHolder> {
     private Context context;
-    private  int mComplexity;
+    private int mComplexity;
 
     StatisticsAdapter(Context context, int complexity) {
         this.context = context;
@@ -35,7 +35,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
             case 0:
                 holder.statistics.setText(R.string.started_games);
                 String startedGames = Database.get(context).readData(mComplexity + "startedGames");
-                if(startedGames.isEmpty())
+                if (startedGames.isEmpty())
                     holder.value.setText("0");
                 else
                     holder.value.setText(startedGames);

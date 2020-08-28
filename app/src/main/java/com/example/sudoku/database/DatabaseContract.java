@@ -3,7 +3,8 @@ package com.example.sudoku.database;
 import android.provider.BaseColumns;
 
 public final class DatabaseContract {
-    private DatabaseContract() {}
+    private DatabaseContract() {
+    }
 
     public static class Entry implements BaseColumns {
         public static final String TABLE_NAME = "saved_sudoku";

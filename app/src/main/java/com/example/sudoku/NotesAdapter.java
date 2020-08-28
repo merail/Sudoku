@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import static com.example.sudoku.Utils.NAMES_OF_DIGITS_LIST;
+
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
     private ArrayList<Integer> list;
@@ -35,36 +37,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        switch (list.get(position))
-        {
-            case 1:
-                holder.note.setImageResource(R.drawable.one);
-                break;
-            case 2:
-                holder.note.setImageResource(R.drawable.two);
-                break;
-            case 3:
-                holder.note.setImageResource(R.drawable.three);
-                break;
-            case 4:
-                holder.note.setImageResource(R.drawable.four);
-                break;
-            case 5:
-                holder.note.setImageResource(R.drawable.five);
-                break;
-            case 6:
-                holder.note.setImageResource(R.drawable.six);
-                break;
-            case 7:
-                holder.note.setImageResource(R.drawable.seven);
-                break;
-            case 8:
-                holder.note.setImageResource(R.drawable.eight);
-                break;
-            default:
-                holder.note.setImageResource(R.drawable.nine);
-                break;
-        }
+        holder.note.setImageResource(context.getResources().getIdentifier(NAMES_OF_DIGITS_LIST.get(list.get(position) - 1),
+                "drawable",
+                context.getPackageName()));
 
         holder.note.setOnClickListener(new View.OnClickListener() {
             @Override

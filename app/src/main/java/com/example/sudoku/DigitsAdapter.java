@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import static com.example.sudoku.Utils.NAMES_OF_DIGITS_LIST;
+
 public class DigitsAdapter extends RecyclerView.Adapter<DigitsAdapter.ViewHolder> {
 
     private ArrayList<Integer> list;
@@ -35,36 +37,9 @@ public class DigitsAdapter extends RecyclerView.Adapter<DigitsAdapter.ViewHolder
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        switch (list.get(position))
-        {
-            case 1:
-                holder.digit.setImageResource(R.drawable.one);
-                break;
-            case 2:
-                holder.digit.setImageResource(R.drawable.two);
-                break;
-            case 3:
-                holder.digit.setImageResource(R.drawable.three);
-                break;
-            case 4:
-                holder.digit.setImageResource(R.drawable.four);
-                break;
-            case 5:
-                holder.digit.setImageResource(R.drawable.five);
-                break;
-            case 6:
-                holder.digit.setImageResource(R.drawable.six);
-                break;
-            case 7:
-                holder.digit.setImageResource(R.drawable.seven);
-                break;
-            case 8:
-                holder.digit.setImageResource(R.drawable.eight);
-                break;
-            default:
-                holder.digit.setImageResource(R.drawable.nine);
-                break;
-        }
+        holder.digit.setImageResource(context.getResources().getIdentifier(NAMES_OF_DIGITS_LIST.get(list.get(position) - 1),
+                "drawable",
+                context.getPackageName()));
 
         holder.digit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -25,11 +25,10 @@ import static com.example.sudoku.Utils.DIGITS_LIST;
 
 public class GameActivity extends AppCompatActivity {
     ArrayList<Integer> mMatrixList;
+    int mComplexity;
     private RecyclerView mNotesRecyclerView;
     private RecyclerView mMatrixRecyclerView;
     private RecyclerView mDigitsRecyclerView;
-
-    int mComplexity;
 
     public static Intent newIntent(Context packageContext, int complexity) {
         Intent intent = new Intent(packageContext, GameActivity.class);
@@ -121,7 +120,7 @@ public class GameActivity extends AppCompatActivity {
 
         String readData = Database.get(getApplicationContext()).readData(mComplexity + "startedGames");
         int startedGames;
-        if(readData.isEmpty())
+        if (readData.isEmpty())
             startedGames = 0;
         else
             startedGames = Integer.parseInt(readData);
@@ -134,7 +133,7 @@ public class GameActivity extends AppCompatActivity {
     void loadGame() {
         String matrix = Database.get(getApplicationContext()).readData("lastGame");
 
-        mComplexity = Integer.parseInt(matrix.substring(0,1));
+        mComplexity = Integer.parseInt(matrix.substring(0, 1));
         matrix = matrix.substring(2);
         matrix = matrix.replace("[", "");
         matrix = matrix.replace("]", "");

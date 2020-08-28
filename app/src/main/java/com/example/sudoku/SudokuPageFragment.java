@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
@@ -35,7 +34,7 @@ public class SudokuPageFragment extends Fragment {
         View v = null;
         //inflater.inflate(R.layout.fragment_complexity_page, container, false);
         //ImageView mSudokuImageView = v.findViewById(R.id.sudokuImageView);
-        
+
 
         return v;
     }
