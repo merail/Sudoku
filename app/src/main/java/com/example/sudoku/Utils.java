@@ -21,6 +21,7 @@ public class Utils {
             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
     public static final ArrayList<Integer> DIGITS_LIST = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    public static final ArrayList<String> NAMES_OF_DIGITS_LIST = new ArrayList<>(Arrays.asList("one", "two", "three", "four", "five", "six", "seven", "eight", "nine"));
 
     public static final int LEVEL_ONE = 0;
     public static final int LEVEL_TWO = 1;

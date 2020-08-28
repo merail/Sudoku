@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static com.example.sudoku.Utils.NAMES_OF_DIGITS_LIST;
+
 public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder> implements OnSetValueListener {
 
     private ArrayList<Integer> list;
@@ -60,36 +62,7 @@ public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder
             }
         }
         else {
-            switch (list.get(position))
-            {
-                case 1:
-                    holder.cell.setImageResource(R.drawable.one);
-                    break;
-                case 2:
-                    holder.cell.setImageResource(R.drawable.two);
-                    break;
-                case 3:
-                    holder.cell.setImageResource(R.drawable.three);
-                    break;
-                case 4:
-                    holder.cell.setImageResource(R.drawable.four);
-                    break;
-                case 5:
-                    holder.cell.setImageResource(R.drawable.five);
-                    break;
-                case 6:
-                    holder.cell.setImageResource(R.drawable.six);
-                    break;
-                case 7:
-                    holder.cell.setImageResource(R.drawable.seven);
-                    break;
-                case 8:
-                    holder.cell.setImageResource(R.drawable.eight);
-                    break;
-                default:
-                    holder.cell.setImageResource(R.drawable.nine);
-                    break;
-            }
+            holder.cell.setImageResource(context.getResources().getIdentifier(NAMES_OF_DIGITS_LIST.get(list.get(position) - 1), "drawable", context.getPackageName()));
         }
 
         holder.cell.setOnTouchListener(new View.OnTouchListener() {
