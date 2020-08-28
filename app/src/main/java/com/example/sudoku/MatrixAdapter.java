@@ -15,16 +15,26 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder> implements OnSetValueListener {
 
     private ArrayList<Integer> list;
+    private Boolean[] constantsList ;
     private Context context;
 
     private int mPosition;
 
     MatrixAdapter(ArrayList<Integer> list, Context context) {
         this.list = list;
+        constantsList = new Boolean[81];
+        for(int i = 0;i < list.size();i++)
+        {
+            constantsList[i] = list.get(i) < 1;
+        }
+
         this.context = context;
     }
 
@@ -101,10 +111,10 @@ public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder
 
     @Override
     public void setValue(int value) {
-        if(list.get(mPosition) == 0)
+        if(constantsList[mPosition]) {
             list.set(mPosition, value);
-
-        notifyDataSetChanged();
+            notifyDataSetChanged();
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
