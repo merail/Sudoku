@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -36,8 +38,18 @@ public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-
-        if (list.get(position) != 0) {
+        if(list.get(position) == 0)
+        {
+            if(position != mPosition)
+            {
+                holder.cell.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+            }
+            else
+            {
+                holder.cell.setBackgroundColor(ContextCompat.getColor(context, R.color.choosenCell));
+            }
+        }
+        else {
             switch (list.get(position))
             {
                 case 1:
@@ -73,9 +85,9 @@ public class MatrixAdapter extends RecyclerView.Adapter<MatrixAdapter.ViewHolder
         holder.cell.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                holder.cell.setBackgroundResource(R.drawable.choosen_cell);
-
                 mPosition = position;
+
+                notifyDataSetChanged();
 
                 return false;
             }
